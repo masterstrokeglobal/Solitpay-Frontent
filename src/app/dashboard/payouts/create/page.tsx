@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuthStore } from '@/context/auth-context';
 import { useGetMerchantById } from '@/features/merchant/api/merchant-query';
-import PayoutRequestForm from '@/features/payout/create/payout-form';
-import { useCreateTransaction } from '@/features/transaction/query/transactions-queries';
+import PayoutRequestForm, { PayoutFormValues } from '@/features/payout/create/payout-form';
+import { useCreatePayout } from '@/features/transaction/query/transactions-queries';
 import { randomID } from '@/lib/utils';
 import Merchant from '@/models/merchant';
 import { TransactionType } from '@/models/transaction';
@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 const PayoutRequestPage = () => {
   const { userDetails } = useAuthStore();
   const router = useRouter();
-  const { mutate, isPending } = useCreateTransaction();
+  const { mutate, isPending } = useCreatePayout();
 
   const { data, isLoading, isSuccess } = useGetMerchantById(userDetails!.id!.toString());
 
@@ -31,12 +31,10 @@ const PayoutRequestPage = () => {
   }, [data, isSuccess]);
 
 
-  const handlePayoutSubmit = async (data: any) => {
+  const handlePayoutSubmit = async (data: PayoutFormValues) => {
     mutate({
-      ...data,
-      merchantId: userDetails?.id,
-      pgId: randomID(),
-      type: TransactionType.WITHDRAWAL,
+      amount: data.amount,
+      withdrawDetails: data.withdrawDetails,
     },{
       onSuccess: () => {
         toast.success('Payout request submitted successfully');
@@ -102,16 +100,12 @@ const PayoutRequestPage = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h3 className="font-medium">Processing Time</h3>
-                    <p className="text-sm text-gray-500">Bank transfers typically take 2-3 business days</p>
-                  </div>
-                  <div>
                     <h3 className="font-medium">Minimum Amount</h3>
-                    <p className="text-sm text-gray-500">Minimum payout amount is $100</p>
+                    <p className="text-sm text-gray-500">Minimum payout amount is Rs. 100</p>
                   </div>
                   <div>
                     <h3 className="font-medium">Maximum Amount</h3>
-                    <p className="text-sm text-gray-500">Maximum payout amount is $10,000 per transaction</p>
+                    <p className="text-sm text-gray-500">Maximum payout amount is Rs.10,000 per transaction</p>
                   </div>
                 </CardContent>
               </Card>

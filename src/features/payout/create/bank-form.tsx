@@ -13,6 +13,7 @@ export const bankAccountSchema = z.object({
     accountNumber: z.string().min(8, "Account number must be at least 8 digits"),
     confirmAccountNumber: z.string(),
     ifscCode: z.string().regex(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Invalid IFSC code format"),
+    bankName: z.string().min(1, "Bank name is required"),
 }).refine((data) => data.accountNumber === data.confirmAccountNumber, {
     message: "Account numbers don't match",
     path: ["confirmAccountNumber"],
@@ -66,6 +67,12 @@ const BankAccountForm = ({
                     name="ifscCode"
                     label="IFSC Code*"
                     className="uppercase bg-gray-50"
+                />
+                <FormInput
+                    control={form.control}
+                    name="bankName"
+                    label="Bank Name*"
+                    className="bg-gray-50"
                 />
             </div>
 

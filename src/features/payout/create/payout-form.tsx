@@ -20,12 +20,12 @@ const createPayoutSchema = (walletBalance: number) => z.object({
         .min(1, "Amount is required")
         .max(walletBalance, `Amount cannot exceed wallet balance of $${walletBalance}`)
         .refine((val) => val <= walletBalance, `Amount cannot exceed wallet balance of $${walletBalance}`),
-    withdrawDetails: z.string({
+    withdrawDetails: z.coerce.number({
         required_error: "Please select a payment method"
     }).min(1, "Please select a payment method"),
 });
 
-type PayoutFormValues = z.infer<ReturnType<typeof createPayoutSchema>>;
+export type PayoutFormValues = z.infer<ReturnType<typeof createPayoutSchema>>;
 
 interface PaymentMethodOptionProps {
     title: string;
@@ -79,7 +79,7 @@ const PayoutRequestForm = ({
         resolver: zodResolver(createPayoutSchema(walletBalance)),
         defaultValues: {
             amount: 0,
-            withdrawDetails: '',
+            withdrawDetails: 0,
         }
     });
 
@@ -96,7 +96,7 @@ const PayoutRequestForm = ({
                         <Wallet className="h-5 w-5 text-blue-500" />
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-2xl font-bold">${walletBalance.toLocaleString()}</p>
+                        <p className="text-2xl font-bold">Rs. {walletBalance.toLocaleString()}</p>
                         <p className="text-sm text-gray-500">Available for withdrawal</p>
                     </div>
                 </CardContent>
@@ -128,8 +128,8 @@ const PayoutRequestForm = ({
                                         key={method.id}
                                         title={method.accountName?.toString() ?? ''}
                                         details={method.accountNumber?.toString() ?? ''}
-                                        selected={field.value === method.id?.toString()}
-                                        onClick={() => field.onChange(method.id?.toString())}
+                                        selected={field.value === method.id}
+                                        onClick={() => field.onChange(method.id)}
                                     />
                                 ))}
                                 {errors.withdrawDetails && (

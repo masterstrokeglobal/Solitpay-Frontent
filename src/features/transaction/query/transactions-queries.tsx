@@ -14,6 +14,17 @@ export const useCreateTransaction = () => {
     });
 };
 
+export const useCreatePayout = () => {
+    return useMutation({
+        mutationFn: transactionAPI.createPayout,
+        onSuccess: () => {
+            toast.success("Payout created successfully");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data?.message ?? "Error creating payout");
+        },
+    });
+};
 export const useGetAllTransactions = (filter?: Record<string, any>) => {
     return useQuery({
         queryKey: ["transactions", filter],

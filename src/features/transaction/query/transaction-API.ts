@@ -15,6 +15,13 @@ export const transactionAPI = {
         return api.post("/transaction", data);
     },
 
+    createPayout: async (data: {
+        amount: number;
+        withdrawDetails: number;
+    }) => {
+        return api.post("/transaction/pay-out", data);
+    },
+
     getAlltransaction: async (filter?: Record<string, any>) => {
         return api.get("/transaction", { params: filter });
     },
