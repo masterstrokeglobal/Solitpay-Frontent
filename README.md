@@ -6,7 +6,7 @@ First, run the development server:
 
 ```bash
 yarn dev 
-# or
+# or 
 pnpm dev
 # or
 bun dev
