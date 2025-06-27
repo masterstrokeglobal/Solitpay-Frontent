@@ -1,7 +1,7 @@
 "use client";
 
+import { Separator } from "@/components/ui/separator";
 import ApiServiceForm from "@/features/api-service/components/api-service-form";
-
 import { ApiServiceSchemaType } from "@/features/api-service/components/api-service-form";
 import { useCreateAPIService } from "@/features/api-service/api/api-service-query";
 import { useRouter } from "next/navigation";
@@ -27,9 +27,21 @@ const CreateApiService = () => {
     };
 
     return (
-        <section className="w-full max-w-xl mx-auto">
-            <h1 className="text-2xl font-bold mb-8">Create API Service</h1>
-            <ApiServiceForm onSubmit={onSubmit} isLoading={isPending} defaultValues={defaultValues} />
+        <section className="container-main min-h-[60vh] my-12">
+            <div className="border-white/20 bg-white/10 max-w-2xl mx-auto backdrop-blur-md shadow-lg rounded-lg p-6">
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-semibold text-white">Create API Service</h3>
+                        <p className="text-sm text-white/70">
+                            Add a new API service to the system
+                        </p>
+                    </div>
+                    <Separator className="bg-white/20" />
+                    <div className="max-w-2xl">
+                        <ApiServiceForm onSubmit={onSubmit} isLoading={isPending} defaultValues={defaultValues} />
+                    </div>
+                </div>
+            </div>
         </section>
     );
 };

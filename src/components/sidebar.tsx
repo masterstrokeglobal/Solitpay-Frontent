@@ -69,7 +69,7 @@ const adminMenuItems: MenuItem[] = [
     {
         name: "API Requests",
         icon: Code2,
-        link: '/dashboard/api-requests',
+        link: '/dashboard/api-request',
     },
     {
         name: "Login Logs",

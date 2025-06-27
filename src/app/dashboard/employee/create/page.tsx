@@ -24,22 +24,26 @@ const CreateEmployeePage = () => {
     };
 
     return (
-        <div className="space-y-6">
-            <div>
-                <h3 className="text-lg font-medium">Create Employee</h3>
-                <p className="text-sm text-muted-foreground">
-                    Add a new employee to the system
-                </p>
+        <section className="container-main min-h-[60vh] my-12">
+            <div className="border-white/20 bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-6">
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-semibold text-white">Create Employee</h3>
+                        <p className="text-sm text-white/70">
+                            Add a new employee to the system
+                        </p>
+                    </div>
+                    <Separator className="bg-white/20" />
+                    <div className="max-w-2xl">
+                        <EmployeeForm
+                            onSubmit={onSubmit}
+                            isLoading={isPending}
+                            defaultValues={defaultValues}
+                        />
+                    </div>
+                </div>
             </div>
-            <Separator />
-            <div className="max-w-2xl">
-                <EmployeeForm
-                    onSubmit={onSubmit}
-                    isLoading={isPending}
-                    defaultValues={defaultValues}
-                />
-            </div>
-        </div>
+        </section>
     );
 };
 

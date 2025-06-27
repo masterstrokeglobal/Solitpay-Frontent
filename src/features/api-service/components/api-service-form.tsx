@@ -39,6 +39,7 @@ const ApiServiceForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
                 <FormInput
                     control={form.control}
                     name="name"
+                    glass
                     label="Name"
                     placeholder="Enter API service name"
                 />
@@ -46,6 +47,7 @@ const ApiServiceForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
                 <FormTextArea
                     control={form.control}
                     name="description"
+                    glass
                     label="Description"
                     placeholder="Enter API service description"
                 />
@@ -53,6 +55,7 @@ const ApiServiceForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
                 <FormInput
                     control={form.control}
                     name="price"
+                    glass
                     label="Price"
                     type="number"
                     placeholder="0.00"
@@ -62,6 +65,7 @@ const ApiServiceForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
                 <FormSwitch
                     control={form.control}
                     name="active"
+                    glass
                     label="Active"
                     description="If enabled, this API service will be available"
                 />
@@ -69,6 +73,7 @@ const ApiServiceForm = ({ onSubmit, defaultValues, isLoading }: Props) => {
                 <FormImage
                     control={form.control}
                     name="imageUrl"
+                    glass
                     label="Service Image"
                     description="Upload an image for this API service"
                 />

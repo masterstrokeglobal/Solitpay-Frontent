@@ -119,10 +119,10 @@ export default function DataTable<TData, TValue>({
                   </TableRow>
                 ))
               ) : (
-                <TableRow>
+                <TableRow className="hover:bg-white/50">
                   <TableCell
                     colSpan={columns.length}
-                    className="h-24 text-center text-white/70"
+                    className="h-24 text-center text-white/70 hover:bg-transparent"
                   >
                     No results.
                   </TableCell>

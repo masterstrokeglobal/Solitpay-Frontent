@@ -47,11 +47,13 @@ const EmployeeForm = ({ defaultValues, onSubmit, isLoading, isUpdate }: Props) =
                 <FormInput
                     control={form.control}
                     name="name"
+                    glass
                     label="Employee Name*"
                 />
                 <FormInput
                     control={form.control}
                     name="email"
+                    glass
                     label="Email*"
                 />
                 {!isUpdate && (
@@ -59,6 +61,7 @@ const EmployeeForm = ({ defaultValues, onSubmit, isLoading, isUpdate }: Props) =
                         control={form.control}
                         name="password"
                         type="password"
+                        glass
                         label="Password*"
                     />
                 )}

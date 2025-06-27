@@ -17,24 +17,24 @@ const merchantColumns: ColumnDef<Merchant>[] = [
     {
         header: "NAME",
         accessorKey: "name",
-        cell: ({ row }) => <div className="w-48 truncate">{row.original.name}</div>,
+        cell: ({ row }) => <div className="w-48 truncate text-white">{row.original.name}</div>,
     },
     {
         header: "EMAIL",
         accessorKey: "email",
-        cell: ({ row }) => <div className="text-[#6B7280] w-48 truncate">{row.original.email}</div>,
+        cell: ({ row }) => <div className="text-white w-48 truncate">{row.original.email}</div>,
     },
     
     {
         header: "COMPANY NAME",
         accessorKey: "companyName",
-        cell: ({ row }) => <div className="w-48 truncate">{row.original.companyName}</div>,
+        cell: ({ row }) => <div className="w-48 truncate text-white">{row.original.companyName}</div>,
     },
     {
         header: "CREATED ON",
         accessorKey: "createdAt",
         cell: ({ row }) => (
-            <span className="text-[#6B7280]">
+            <span className="text-white">
                 {dayjs(row.original.createdAt).format("DD-MM-YYYY")}
             </span>
         ),

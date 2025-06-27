@@ -20,12 +20,14 @@ function FormTextArea<
   name,
   description,
   label,
+  glass,
   ...props
 }: {
   label?: string
   control: Control<TFieldValues>
   name: TName
   description?: string
+  glass?: boolean
 } & React.InputHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <FormField
@@ -33,9 +35,13 @@ function FormTextArea<
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && <FormLabel className={glass ? "text-white/90" : ""}>{label}</FormLabel>}
           <FormControl>
-            <Textarea {...props} {...field} />
+            <Textarea 
+              {...props} 
+              {...field} 
+              className={glass ? "backdrop-blur-md bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-blue-500/50 focus:border-blue-400/30" : ""}
+            />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

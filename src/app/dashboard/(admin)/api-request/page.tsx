@@ -66,7 +66,7 @@ const APIRequestTable = () => {
   return (
     <section className="container-main min-h-[60vh] my-12">
       <header className="flex flex-col md:flex-row gap-4 flex-wrap md:items-center justify-between">
-        <h2 className="text-xl font-semibold">API Requests</h2>
+        <h2 className="text-xl font-semibold text-white">API Requests</h2>
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex gap-2 flex-1">
             <div className="relative min-w-52 flex-1">
