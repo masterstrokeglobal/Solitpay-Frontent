@@ -68,7 +68,7 @@ const UserPaymentsTable = () => {
         <section className="container-main min-h-[60vh] my-12">
             <header className="flex flex-col md:flex-row gap-4 flex-wrap md:items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <h2 className="text-xl font-semibold">Withdrawal Requests</h2>
+                    <h2 className="text-xl font-semibold text-white">User Withdrawal Requests</h2>
 
                 </div>
                 <div className="flex gap-5">

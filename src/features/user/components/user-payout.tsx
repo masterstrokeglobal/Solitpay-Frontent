@@ -70,7 +70,7 @@ const userWithdrawalColumns: ColumnDef<UserWithdrawal>[] = [
         header: "CREATED AT",
         accessorKey: "createdAt",
         cell: ({ row }) => (
-            <div className="text-[#6B7280]">
+            <div className="text-white">
                 {new Date(row.original.createdAt).toLocaleString()}
             </div>
         ),

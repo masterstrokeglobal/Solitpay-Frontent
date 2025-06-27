@@ -118,24 +118,24 @@ const Sidebar = ({ className }: PropsWithClassName) => {
             return (
                 <AccordionItem value={item.name} key={item.name}>
                     <AccordionTrigger className={cn(
-                        "flex items-center py-2 px-4 text-sm font-medium [&[data-state=open]]:text-black [&[data-state=open]]:bg-gray-200 [&[data-state=open]]:rounded-b-none rounded-md hover:bg-primary ",
-                        isActive && "bg-primary text-primary-foreground hover:bg-primary/90"
+                        "flex items-center py-2 px-4 text-sm font-medium text-gray-300 [&[data-state=open]]:text-white [&[data-state=open]]:bg-white/20 [&[data-state=open]]:rounded-b-none rounded-md hover:bg-white/10 hover:text-white",
+                        isActive && "bg-white/20 text-white hover:bg-white/30"
                     )}>
                         <span className="flex items-center">
                             <item.icon className="mr-2 h-4 w-4" />
                             {item.name}
                         </span>
                     </AccordionTrigger>
-                    <AccordionContent className='bg-gray-200 rounded-b-md pl-4'>
+                    <AccordionContent className='bg-white/10 rounded-b-md pl-4'>
                         <div className="flex flex-col space-y-1 px-4">
                             {item.subItems.map((subItem) => (
                                 <Link
                                     key={subItem.name}
                                     href={subItem.link}
                                     className={cn(
-                                        "flex items-center py-2 px-2 text-sm font-medium rounded-md hover:bg-gray-300 hover:text-accent-foreground",
+                                        "flex items-center py-2 px-2 text-sm font-medium rounded-md hover:bg-white/20 hover:text-white text-gray-300",
                                         "transition-colors duration-200",
-                                        pathname === subItem.link && "bg-primary/50 text-accent-foreground"
+                                        pathname === subItem.link && "bg-white/20 text-white"
                                     )}
                                 >
                                     {subItem.name}
@@ -151,9 +151,9 @@ const Sidebar = ({ className }: PropsWithClassName) => {
                     key={item.name}
                     href={item.link}
                     className={cn(
-                        "flex items-center py-2 px-4 text-sm font-medium rounded-md hover:bg-blue-100 hover:text-accent-foreground",
+                        "flex items-center py-2 px-4 text-sm font-medium rounded-md hover:bg-white/10 hover:text-white text-gray-300",
                         "transition-colors duration-200",
-                        isActive && "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                        isActive && "bg-white/20 text-white hover:bg-white/30"
                     )}
                 >
                     <item.icon className="mr-2 h-4 w-4" />
@@ -216,9 +216,9 @@ const Sidebar = ({ className }: PropsWithClassName) => {
     }
 
     return (
-        <div className={cn("flex  flex-col ", className)}>
+        <div className={cn("flex  flex-col bg-[url('/images/sidebar.jpg')] bg-cover rounded-r-xl shadow-sm bg-center", className)}>
             <div className="flex h-16 items-center  px-4">
-                <Logo />
+                <Logo className="text-white" />
             </div>
             <nav className="flex-1 overflow-y-auto px-4 pt-8">
                 <Accordion type="multiple" className="w-full space-y-2">

@@ -25,37 +25,37 @@ const MerchantProfileCard = ({ merchant }: { merchant: Merchant }) => {
   };
 
   const InfoItem = ({ icon: Icon, label, value, className = "" }:any) => (
-    <div className={`p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors ${className}`}>
+    <div className={`p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-300 border border-white/20 backdrop-blur-sm ${className}`}>
       <div className="flex items-center space-x-3">
         <div className="flex-shrink-0">
-          <Icon className="h-5 w-5 text-blue-500" />
+          <Icon className="h-5 w-5 text-blue-300" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-gray-500">{label}</p>
-          <p className="text-sm font-semibold text-gray-900 truncate">{value || 'N/A'}</p>
+          <p className="text-xs font-medium text-white/70">{label}</p>
+          <p className="text-sm font-semibold text-white truncate">{value || 'N/A'}</p>
         </div>
       </div>
     </div>
   );
 
   const Section = ({ title, children }:any) => (
-    <div className="space-y-3">
-      <h3 className="text-base font-semibold text-gray-900 border-l-4 border-blue-500 pl-3">{title}</h3>
-      <div className="grid gap-3">{children}</div>
+    <div className="space-y-4">
+      <h3 className="text-base font-semibold text-white border-l-4 border-blue-400 pl-3 backdrop-blur-sm">{title}</h3>
+      <div className="grid gap-4">{children}</div>
     </div>
   );
 
   return (
-    <Card className="w-full ">
-      <CardHeader className="border-b bg-gray-50">
+    <Card variant="glass" className="w-full overflow-hidden ">
+      <CardHeader className="border-b border-white/20 bg-white/5 backdrop-blur-sm">
         <div className="flex justify-between items-center">
           <CardTitle className="flex items-center space-x-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <User className="h-6 w-6 text-blue-600" />
+            <div className="p-2 bg-blue-500/20 rounded-xl border border-blue-400/30 backdrop-blur-sm">
+              <User className="h-6 w-6 text-blue-300" />
             </div>
-            <span className="text-xl">Merchant Profile</span>
+            <span className="text-xl text-white">Merchant Profile</span>
             {merchant.isVerified && (
-              <BadgeCheck className="h-6 w-6 text-green-500" />
+              <BadgeCheck className="h-6 w-6 text-green-400" />
             )}
           </CardTitle>
         </div>
@@ -75,7 +75,7 @@ const MerchantProfileCard = ({ merchant }: { merchant: Merchant }) => {
                 icon={Building2}
                 label="Company Name"
                 value={merchant.companyName}
-                className="bg-blue-50 hover:bg-blue-100"
+                className="bg-blue-500/10 hover:bg-blue-500/20 border-blue-400/30"
               />
               <InfoItem icon={MapPin} label="Company Address" value={merchant.companyAddress} />
               <InfoItem
@@ -106,14 +106,14 @@ const MerchantProfileCard = ({ merchant }: { merchant: Merchant }) => {
                 icon={BadgeCheck}
                 label="Verification Status"
                 value={merchant.isVerified ? 'Verified' : 'Not Verified'}
-                className={merchant.isVerified ? 'bg-green-50 hover:bg-green-100' : 'bg-gray-50 hover:bg-gray-100'}
+                className={merchant.isVerified ? 'bg-green-500/10 hover:bg-green-500/20 border-green-400/30' : 'bg-white/10 hover:bg-white/20 border-white/20'}
               />
               {merchant.deletedAt && (
                 <InfoItem
                   icon={Calendar}
                   label="Deletion Date"
                   value={formatDate(merchant.deletedAt)}
-                  className="bg-red-50 hover:bg-red-100"
+                  className="bg-red-500/10 hover:bg-red-500/20 border-red-400/30"
                 />
               )}
             </Section>

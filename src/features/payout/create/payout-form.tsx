@@ -43,20 +43,21 @@ const PaymentMethodOption = ({
     <div
         onClick={onClick}
         className={cn(
-            "flex items-center justify-between p-4 rounded-lg cursor-pointer",
-            "bg-slate-100 transition-all duration-200",
-            "hover:bg-slate-200",
-            selected && "border-2 border-blue-500"
+            "flex items-center justify-between p-4 rounded-xl cursor-pointer",
+            "bg-white/5 backdrop-blur-2xl border border-white/10 transition-all duration-300",
+            "hover:bg-white/15 hover:border-white/25 hover:shadow-2xl hover:shadow-white/5",
+            "shadow-xl shadow-black/10",
+            selected && "border-2 border-blue-400/60 bg-blue-500/10 shadow-blue-500/20"
         )}
     >
         <div className="flex items-center gap-3">
             <div className={cn(
-                "w-3 h-3 rounded-full",
-                selected ? "bg-blue-500" : "border-2 border-gray-400"
+                "w-4 h-4 rounded-full transition-all duration-300",
+                selected ? "bg-blue-400 shadow-lg shadow-blue-400/50" : "border-2 border-white/30"
             )} />
             <div>
-                <p className="font-medium">{title}</p>
-                <p className="text-sm text-gray-600">{details}</p>
+                <p className="font-medium text-white/90">{title}</p>
+                <p className="text-sm text-white/60">{details}</p>
             </div>
         </div>
     </div>
@@ -89,15 +90,15 @@ const PayoutRequestForm = ({
 
     return (
         <div className="w-full max-w-md mx-auto p-6">
-            <Card className="mb-6">
+            <Card className="mb-6 bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-black/20">
                 <CardContent className="pt-6">
-                    <div className="flex items-center justify-between mb-2">
-                        <Label className="text-sm font-medium">Available Balance</Label>
-                        <Wallet className="h-5 w-5 text-blue-500" />
+                    <div className="flex items-center justify-between mb-3">
+                        <Label className="text-sm font-medium text-white/80">Available Balance</Label>
+                        <Wallet className="h-5 w-5 text-blue-400/80" />
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-2xl font-bold">Rs. {walletBalance.toLocaleString()}</p>
-                        <p className="text-sm text-gray-500">Available for withdrawal</p>
+                    <div className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-2xl border border-white/15 p-5 rounded-xl shadow-2xl shadow-black/20">
+                        <p className="text-2xl font-bold text-white/90">Rs. {walletBalance.toLocaleString()}</p>
+                        <p className="text-sm text-white/60">Available for withdrawal</p>
                     </div>
                 </CardContent>
             </Card>
@@ -109,12 +110,13 @@ const PayoutRequestForm = ({
                     type="number"
                     control={control}
                     placeholder="Enter withdrawal amount"
+                    glass
                 />
 
-                <div className="space-y-2">
-                    <Label>Select Payment Method</Label>
+                <div className="space-y-3">
+                    <Label className="text-white/80">Select Payment Method</Label>
                     {paymentMethods.length === 0 && (
-                        <p className="text-sm text-yellow-600 bg-yellow-50 p-3 rounded">
+                        <p className="text-sm text-yellow-300/90 bg-gradient-to-r from-yellow-500/20 to-yellow-500/10 backdrop-blur-2xl border border-yellow-500/30 p-4 rounded-xl shadow-xl shadow-yellow-500/10">
                             No payment methods available. Please add a payment method to continue.
                         </p>
                     )}
@@ -122,7 +124,7 @@ const PayoutRequestForm = ({
                         control={control}
                         name="withdrawDetails"
                         render={({ field }) => (
-                            <div className="space-y-2">
+                            <div className="space-y-3">
                                 {paymentMethods.map((method) => (
                                     <PaymentMethodOption
                                         key={method.id}
@@ -133,7 +135,7 @@ const PayoutRequestForm = ({
                                     />
                                 ))}
                                 {errors.withdrawDetails && (
-                                    <p className="text-red-500 text-sm">{errors.withdrawDetails.message}</p>
+                                    <p className="text-red-400/90 text-sm bg-gradient-to-r from-red-500/20 to-red-500/10 backdrop-blur-2xl border border-red-500/30 p-3 rounded-xl shadow-xl shadow-red-500/10">{errors.withdrawDetails.message}</p>
                                 )}
                             </div>
                         )}
@@ -142,7 +144,7 @@ const PayoutRequestForm = ({
 
                 <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 backdrop-blur-2xl border border-white/15 text-white/90 shadow-2xl shadow-black/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-white/5"
                     disabled={isFormDisabled}
                 >
                     {isLoading ? (

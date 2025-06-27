@@ -8,6 +8,8 @@ import useLogin from "@/hooks/use-login";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect } from "react";
 import Navbar from "./navbar";
+import AnimatedWaveBackground from "./animated-background";
+
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
     const { loading, userDetails } = useAuthStore();
@@ -25,9 +27,10 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
 
     console.log(userDetails);
     return (
-        <div className="min-h-screen bg-[#f5f7f9] w-full md:p-4 ">
+        <div className="min-h-screen w-full relative md:p-4 ">
+            <AnimatedWaveBackground className="absolute top-0 left-0 w-full h-full" />
             <Sidebar className="h-screen hidden md:block w-64 absolute top-0 left-0" />
-            <ScrollArea className="flex flex-col md:ml-64 bg-white relative h-[calc(100vh-32px)] border md:rounded-xl ">
+            <ScrollArea className="flex flex-col md:ml-64  relative h-[calc(100vh-32px)]  ">
                 <Navbar />
                 <main className="flex-1 p-4 lg:p-6">
                     {children}

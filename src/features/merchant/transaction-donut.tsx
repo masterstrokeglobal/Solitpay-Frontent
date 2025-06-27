@@ -45,28 +45,36 @@ export function TransactionDonut({
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                color: 'white',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+              }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>
       
       <div className="text-center">
-        <h3 className="text-lg font-medium">Total</h3>
-        <p className="text-2xl font-bold">{total}</p>
+        <h3 className="text-lg font-medium text-white">Total</h3>
+        <p className="text-2xl font-bold text-white">{total}</p>
       </div>
       
       <div className="flex flex-wrap gap-4 w-full">
         {data.map((item) => (
           <div 
             key={item.name} 
-            className="flex  flex-1 items-center p-2 rounded-md"
-            style={{ backgroundColor: `${item.color}20` }}
+            className="flex flex-1 items-center p-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow"
           >
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-              <span className="font-medium">{item.name}</span>
+              <div className="w-3 h-3 rounded-full shadow-sm" style={{ backgroundColor: item.color }}></div>
+              <span className="font-medium text-white">{item.name}</span>
             </div>
-            <span className="text-lg font-bold ml-auto">{item.value}</span>
+            <span className="text-lg font-bold ml-auto text-white">{item.value}</span>
           </div>
         ))}
       </div>

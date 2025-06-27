@@ -47,9 +47,9 @@ export const QuickActions = () => {
                     Generate New QR
                 </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent glass className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg p-6 shadow-lg shadow-black/20">
                 <DialogClose ref={closeButtonRef} />
-                <ScrollArea className="h-[80vh]">
+                <ScrollArea className="h-[80vh] ">
                     <QRGenerateForm onSubmit={handleGenerateNewQR} isGenerating={createMutation.isPending} />
                 </ScrollArea>
             </DialogContent>

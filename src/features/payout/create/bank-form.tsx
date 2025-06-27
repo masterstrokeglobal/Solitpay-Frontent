@@ -44,35 +44,39 @@ const BankAccountForm = ({
             <div className="space-y-6">
                 <FormInput
                     control={form.control}
+                    placeholder="Enter Account Holder Name"
                     name="accountName"
+                    glass
                     label="Account Holder Name*"
-                    className="bg-gray-50"
                 />
                 <FormInput
                     control={form.control}
+                    placeholder="Enter Account Number"
                     name="accountNumber"
+                    glass
                     label="Account Number*"
                     type="password"
-                    className="bg-gray-50"
                 />
                 <FormInput
                     control={form.control}
                     name="confirmAccountNumber"
+                    glass
                     label="Confirm Account Number*"
                     type="password"
-                    className="bg-gray-50"
                 />
                 <FormInput
                     control={form.control}
                     name="ifscCode"
+                    glass
                     label="IFSC Code*"
-                    className="uppercase bg-gray-50"
+                    className="uppercase"
                 />
                 <FormInput
                     control={form.control}
                     name="bankName"
+                    glass
+                    placeholder="Enter Bank Name"
                     label="Bank Name*"
-                    className="bg-gray-50"
                 />
             </div>
 

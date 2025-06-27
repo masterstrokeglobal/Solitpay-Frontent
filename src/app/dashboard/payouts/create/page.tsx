@@ -9,7 +9,7 @@ import { useCreatePayout } from '@/features/transaction/query/transactions-queri
 import { randomID } from '@/lib/utils';
 import Merchant from '@/models/merchant';
 import { TransactionType } from '@/models/transaction';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, HelpCircle, Info } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
@@ -50,28 +50,34 @@ const PayoutRequestPage = () => {
   }
 
   if (!userDetails?.isMerchant) {
-    return (<div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-4">
-        <h1 className="text-xl font-semibold">You are not authorized to view this page</h1>
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900/20">
+        <div className="container mx-auto px-4 py-4">
+          <h1 className="text-xl font-semibold text-white">You are not authorized to view this page</h1>
+        </div>
       </div>
-    </div>);
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900/20">
       {/* Header */}
-      <div className="bg-white border-b">
+      <div className="bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link href="/merchants/dashboard">
-                <Button variant="ghost" size="icon">
+              <Link href="/dashboard/payouts">
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className="text-white hover:bg-white/20 backdrop-blur-xl border border-white/20"
+                >
                   <ArrowLeft className="h-5 w-5" />
                 </Button>
               </Link>
-              <h1 className="text-xl font-semibold">Request Payout</h1>
+              <h1 className="text-xl font-semibold text-white">Request Payout</h1>
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-300">
               ID: {merchant?.id}
             </div>
           </div>
@@ -94,31 +100,40 @@ const PayoutRequestPage = () => {
 
             {/* Right Side - Info Cards */}
             <div className="space-y-4">
-              <Card>
+              <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/20">
                 <CardHeader>
-                  <CardTitle className="text-lg">Payout Information</CardTitle>
+                  <CardTitle className="text-lg text-white flex items-center gap-2">
+                    <Info className="h-5 w-5" />
+                    Payout Information
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h3 className="font-medium">Minimum Amount</h3>
-                    <p className="text-sm text-gray-500">Minimum payout amount is Rs. 100</p>
+                    <h3 className="font-medium text-white">Minimum Amount</h3>
+                    <p className="text-sm text-gray-300">Minimum payout amount is Rs. 100</p>
                   </div>
                   <div>
-                    <h3 className="font-medium">Maximum Amount</h3>
-                    <p className="text-sm text-gray-500">Maximum payout amount is Rs.10,000 per transaction</p>
+                    <h3 className="font-medium text-white">Maximum Amount</h3>
+                    <p className="text-sm text-gray-300">Maximum payout amount is Rs.10,000 per transaction</p>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/20">
                 <CardHeader>
-                  <CardTitle className="text-lg">Need Help?</CardTitle>
+                  <CardTitle className="text-lg text-white flex items-center gap-2">
+                    <HelpCircle className="h-5 w-5" />
+                    Need Help?
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-gray-300 mb-4">
                     If you have any questions about payouts, please contact our support team.
                   </p>
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20"
+                  >
                     Contact Support
                   </Button>
                 </CardContent>

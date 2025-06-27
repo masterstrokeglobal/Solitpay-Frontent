@@ -89,7 +89,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar {...props} className=" p-4 z-50">
+    <Sidebar {...props} className=" p-4 z-50  bg-cover bg-center">
       <SidebarHeader className="mb-12">
         <SidebarMenu>
           <SidebarMenuItem className="mx-auto">

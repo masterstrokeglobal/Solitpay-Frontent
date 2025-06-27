@@ -45,17 +45,33 @@ const Pagination = ({ className, changePage, page, totalPage }: Props) => {
     }
 
     return (
-        <div className={cn("border flex h-fit items-center rounded-md", className)}>
-            <Button className="my-0 rounded-none" onClick={prevPage} variant={'ghost'}>
+        <div className={cn("flex h-fit items-center rounded-md bg-white/10 backdrop-blur-md border border-white/20", className)}>
+            <Button 
+                className="my-0 rounded-none bg-transparent hover:bg-white/20 text-white border-none" 
+                onClick={prevPage} 
+                variant={'ghost'}
+            >
                 Previous
             </Button>
             {pages.map((p) => (
-                <Button key={p} variant={'ghost'} className={cn("my-0 border rounded-none", p === page ? 'bg-[#E1EFFE] text-[#1C64F2] :' : '')} onClick={() => changePage(p)}>
+                <Button 
+                    key={p} 
+                    variant={'ghost'} 
+                    className={cn(
+                        "my-0 rounded-none bg-transparent hover:bg-white/20 text-white border-none", 
+                        p === page ? 'bg-white/20 text-white' : ''
+                    )} 
+                    onClick={() => changePage(p)}
+                >
                     {p}
                 </Button>
             ))}
 
-            <Button className="my-0 rounded-none" onClick={nextPage} variant={'ghost'}>
+            <Button 
+                className="my-0 rounded-none bg-transparent hover:bg-white/20 text-white border-none" 
+                onClick={nextPage} 
+                variant={'ghost'}
+            >
                 Next
             </Button>
         </div>

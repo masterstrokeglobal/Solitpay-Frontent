@@ -60,16 +60,18 @@ const ApiKeyGeneratorForm = ({
                     label="IP Address"
                     type="text"
                     control={control}
+                    glass       
                     placeholder="192.168.1.1 or *.168.1.1 or *"
                     description='Enter the IP address that will be allowed to use this API key. Use "*" to allow all IP addresses.'
                 />
 
                 <FormSelect
                     control={control}
-                    options={modeOptions}
+                    options={modeOptions}   
                     label="API Key Mode"
                     name="mode"
                     placeholder="Select API Key Mode"
+                    glass
                 />
 
                 <Button

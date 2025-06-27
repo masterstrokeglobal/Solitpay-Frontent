@@ -11,7 +11,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "ID",
         accessorKey: "id",
         cell: ({ row }) => (
-            <div className="font-medium">{row.original.id}</div>
+            <div className="font-medium text-white">{row.original.id}</div>
         ),
     },
     {
@@ -33,7 +33,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "UTR",
         accessorKey: "pgId",
         cell: ({ row }) => (
-            <div className="text-[#6B7280]">
+            <div className="text-white">
                 {row.original.pgId}
             </div>
         ),
@@ -42,7 +42,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "AMOUNT",
         accessorKey: "amount",
         cell: ({ row }) => (
-            <div className="font-medium">
+            <div className="font-medium text-white">
                 Rs.{row.original.amount.toFixed(2)}
             </div>
         ),
@@ -77,7 +77,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "Platform Fee %",
         accessorKey: "bonusPercentage",
         cell: ({ row }) => (
-            <div className="text-[#6B7280]">
+            <div className="text-white">
                 {row.original.platformFeePercentage}%
             </div>
         ),
@@ -86,7 +86,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "Platform Fee",
         accessorKey: "bonusAmount",
         cell: ({ row }) => (
-            <div className="text-[#6B7280]">
+            <div className="text-white">
                 Rs.{row.original.platformFeeAmount.toFixed(2)}
             </div>
         ),
@@ -95,7 +95,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         header: "CREATED AT",
         accessorKey: "createdAt",
         cell: ({ row }) => (
-            <div className="text-[#6B7280]">
+            <div className="text-white">
                 {new Date(row.original.createdAt).toLocaleString()}
             </div>
         ),

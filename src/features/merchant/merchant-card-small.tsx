@@ -11,10 +11,10 @@ const DetailRow = ({ icon: Icon, label, value }: { icon: any, label: string, val
   
   return (
     <div className="flex items-start gap-3 py-2">
-      <Icon className="w-5 h-5 text-gray-500 mt-0.5" />
+      <Icon className="w-5 h-5 text-white/60 mt-0.5" />
       <div>
-        <p className="text-sm text-gray-500">{label}</p>
-        <p className="text-sm font-medium">{value}</p>
+        <p className="text-sm text-white/60">{label}</p>
+        <p className="text-sm font-medium text-white">{value}</p>
       </div>
     </div>
   );
@@ -28,9 +28,9 @@ const WithdrawalDetailsCard = ({ withdrawDetails }:{withdrawDetails:WithdrawDeta
   };
 
   return (
-    <Card className="w-full ">
+    <Card className="w-full bg-white/10 border-white/20 backdrop-blur-md shadow-lg">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl">Bank Account Details</CardTitle>
+        <CardTitle className="text-xl text-white">Bank Account Details</CardTitle>
       </CardHeader>
       
       <CardContent className="grid gap-2">
@@ -64,9 +64,9 @@ const WithdrawalDetailsCard = ({ withdrawDetails }:{withdrawDetails:WithdrawDeta
 
 const MerchantDetailsCard = ({ merchant }:{merchant:Merchant}) => {
     return (
-      <Card className="w-full ">
+      <Card className="w-full bg-white/10 border-white/20 backdrop-blur-md shadow-lg">
         <CardHeader className="pb-4">
-          <CardTitle className="text-xl">Merchant Details</CardTitle>
+          <CardTitle className="text-xl text-white">Merchant Details</CardTitle>
         </CardHeader>
         
         <CardContent className="grid gap-2">

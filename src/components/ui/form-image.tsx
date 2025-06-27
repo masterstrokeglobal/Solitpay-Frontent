@@ -18,6 +18,7 @@ interface FormImageProps<
     className?: string;
     inputClassName?: string;
     accept?: string;
+    glass?: boolean;
 }
 
 const FormImage = <
@@ -31,6 +32,7 @@ const FormImage = <
     className,
     inputClassName,
     accept = "image/*",
+    glass = false,
 }: FormImageProps<TFieldValues, TName>) => {
     const { setValue, watch } = useFormContext();
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -79,11 +81,11 @@ const FormImage = <
             name={name}
             render={({ field: { onChange } }) => (
                 <FormItem className={className}>
-                    {label && <FormLabel>{label}</FormLabel>}
+                    {label && <FormLabel className={glass ? "text-white" : ""}>{label}</FormLabel>}
                     <FormControl>
                         <div className="relative">
                             {previewUrl ? (
-                                <div className="relative bg-gray-100 rounded-xl pr-12 ">
+                                <div className={`relative rounded-xl pr-12 ${glass ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-gray-100"}`}>
                                     <img
                                         src={previewUrl}
                                         alt="Preview"
@@ -102,10 +104,13 @@ const FormImage = <
                             ) : (
                                 <div
                                     className={`
-                                        border-2 border-dashed bg-[#FAFAFA] 
-                                        border-[#E2E2E2] rounded-lg p-6 
-                                        cursor-pointer hover:border-gray-400 
-                                        transition-colors ${inputClassName}
+                                        border-2 border-dashed rounded-lg p-6 
+                                        cursor-pointer transition-colors
+                                        ${glass 
+                                            ? "bg-white/10 backdrop-blur-md border-white/20 hover:border-white/40 text-white" 
+                                            : "bg-[#FAFAFA] border-[#E2E2E2] hover:border-gray-400"
+                                        }
+                                        ${inputClassName}
                                     `}
                                     onClick={() => document.getElementById(`file-${name}`)?.click()}
                                 >
@@ -123,11 +128,11 @@ const FormImage = <
                                                 <span>Uploading...</span>
                                             </div>
                                         ) : (
-                                            <div className="flex text-sm text-gray-600">
+                                            <div className={`flex text-sm ${glass ? "text-white/70" : "text-gray-600"}`}>
                                                 <p className="relative">
                                                     Drop a file here or
                                                     {" "}
-                                                    <span className="text-blue-600 hover:underline">browse</span>
+                                                    <span className={`${glass ? "text-blue-300 hover:text-blue-200" : "text-blue-600 hover:underline"} hover:underline`}>browse</span>
                                                     {" "}to upload file
                                                 </p>
                                             </div>
@@ -150,7 +155,7 @@ const FormImage = <
                             />
                         </div>
                     </FormControl>
-                    {description && <FormDescription>{description}</FormDescription>}
+                    {description && <FormDescription className={glass ? "text-white/70" : ""}>{description}</FormDescription>}
                     <FormMessage />
                 </FormItem>
             )}

@@ -48,9 +48,9 @@ const MerchantDocumentForm = ({ defaultValues, onSubmit, isLoading }: Props) => 
         <FormProvider onSubmit={form.handleSubmit(handleSubmit)} methods={form}>
             <div className="space-y-8">
                 {/* MOA and AOA */}
-                <Card>
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                     <CardHeader>
-                        <CardTitle>Incorporation Documents</CardTitle>
+                        <CardTitle className="text-white">Incorporation Documents</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -58,20 +58,22 @@ const MerchantDocumentForm = ({ defaultValues, onSubmit, isLoading }: Props) => 
                                 control={form.control}
                                 name="moa"
                                 label="Memorandum of Association (MOA)*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="aoa"
                                 label="Articles of Association (AOA)*"
+                                glass={true}
                             />
                         </div>
                     </CardContent>
                 </Card>
 
                 {/* Company Registration Documents */}
-                <Card>
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                     <CardHeader>
-                        <CardTitle>Company Registration Documents</CardTitle>
+                        <CardTitle className="text-white">Company Registration Documents</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -79,25 +81,28 @@ const MerchantDocumentForm = ({ defaultValues, onSubmit, isLoading }: Props) => 
                                 control={form.control}
                                 name="companyPanCard"
                                 label="Company PAN Card*"
+                                glass
                             />
                             <FormImage
                                 control={form.control}
                                 name="companyGSTNumber"
                                 label="Company GST Certificate*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="cio"
                                 label="Certificate of Incorporation*"
+                                glass={true}
                             />
                         </div>
                     </CardContent>
                 </Card>
 
                 {/* Financial and Office Documents */}
-                <Card>
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                     <CardHeader>
-                        <CardTitle>Financial and Office Documents</CardTitle>
+                        <CardTitle className="text-white">Financial and Office Documents</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -105,30 +110,34 @@ const MerchantDocumentForm = ({ defaultValues, onSubmit, isLoading }: Props) => 
                                 control={form.control}
                                 name="cancelledCheque"
                                 label="Cancelled Cheque*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="rentAgreement"
                                 label="Rent Agreement*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="officeVideo"
                                 label="Office Video*"
+                                glass={true}
                             />
                         </div>
                         <FormMultiImageUpload
                             control={form.control}
                             name="officePhotos"
                             label="Office Photos*"
+                            glass={true}
                         />
                     </CardContent>
                 </Card>
 
                 {/* Director Documents */}
-                <Card>
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                     <CardHeader>
-                        <CardTitle>Director Documents</CardTitle>
+                        <CardTitle className="text-white">Director Documents</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,27 +145,30 @@ const MerchantDocumentForm = ({ defaultValues, onSubmit, isLoading }: Props) => 
                                 control={form.control}
                                 name="directorAadharCardFront"
                                 label="Director Aadhar Card (Front)*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="directorAadharCardBack"
                                 label="Director Aadhar Card (Back)*"
+                                glass={true}
                             />
                             <FormImage
                                 control={form.control}
                                 name="directorPan"
                                 label="Director PAN Card*"
-                            />
+                                glass={true}
+                                />
                         </div>
                     </CardContent>
                 </Card>
             </div>
 
             <footer className="flex justify-end gap-4 mt-8">
-                <Button type="button" variant="outline" onClick={() => form.reset()}>
+                <Button type="button" variant="outline" onClick={() => form.reset()} className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm">
                     Reset
                 </Button>
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading} className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm">
                     {isLoading ? "Saving..." : "Save Documents"}
                 </Button>
             </footer>

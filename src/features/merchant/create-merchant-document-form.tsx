@@ -22,7 +22,6 @@ const CreateMerchantDocumentForm = ({merchantId}:Props) => {
             return {
                 moa: "",
                 aoa: "",
-
                 companyPanCard: "",
                 companyGSTNumber: "",
                 cio: "",
@@ -38,9 +37,7 @@ const CreateMerchantDocumentForm = ({merchantId}:Props) => {
         return null;
     }, [merchantData, isSuccess, isError]);
 
-
     const { mutate: createMerchantDocument, isPending:createPending } = useCreateMerchantDocument();
-
     const {mutate:updateMerchantDocument,isPending:updatePending} = useUpdateMerchantDocument();
 
     const onSubmit = (data: MerchantDocumentFormValues) => {
@@ -53,9 +50,7 @@ const CreateMerchantDocumentForm = ({merchantId}:Props) => {
                     router.push(`/dashboard/merchants/${merchantId}`);
                 }
             });
-        }
-        else{
-
+        } else {
             createMerchantDocument({
                 ...data, merchant: merchantId
             }, {
@@ -65,12 +60,20 @@ const CreateMerchantDocumentForm = ({merchantId}:Props) => {
             });
         }
     }
-    return <section className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">Save Merchant Document</h1>
-        {isLoading && <LoadingScreen className="min-h-96" />}
-        {defaultValues !== null && <MerchantDocumentForm onSubmit={onSubmit} isLoading={createPending || updatePending || isLoading} defaultValues={defaultValues} />}
 
-    </section>
+    return (
+        <section className="flex flex-col gap-4 p-6 rounded-lg bg-white/10 backdrop-blur-md border border-white/20">
+            <h1 className="text-2xl font-bold text-white">Save Merchant Document</h1>
+            {isLoading && <LoadingScreen className="min-h-96" />}
+            {defaultValues !== null && (
+                <MerchantDocumentForm 
+                    onSubmit={onSubmit} 
+                    isLoading={createPending || updatePending || isLoading} 
+                    defaultValues={defaultValues} 
+                />
+            )}
+        </section>
+    );
 }
 
 export default CreateMerchantDocumentForm;

@@ -99,84 +99,86 @@ const TransactionTable = ({ userId }: Props) => {
 
     return (
         <section className="container-main min-h-[60vh] my-12">
-            <header className="flex flex-col md:flex-row gap-4 flex-wrap md:items-center justify-between">
-                <h2 className="text-xl font-semibold">Transactions</h2>
-                <div className="flex gap-5 ">
-                    <div className="relative min-w-60 flex-1">
-                        <Search size={18} className="absolute top-2.5 left-2.5" />
-                        <Input
-                            placeholder="Search"
-                            onChange={handleSearch}
-                            className="pl-10"
-                        />
+            <div className="border-white/20 bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-6">
+                <header className="flex flex-col md:flex-row gap-4 flex-wrap md:items-center justify-between">
+                    <h2 className="text-xl font-semibold text-white">Transactions</h2>
+                    <div className="flex gap-5 ">
+                        <div className="relative min-w-60 flex-1">
+                            <Search size={18} className="absolute top-2.5 left-2.5 text-white" />
+                            <Input
+                                placeholder="Search"
+                                onChange={handleSearch}
+                                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/70 backdrop-blur-sm"
+                            />
+                        </div>
+                        {/* ShadCN Select for Type Filter */}
+                        <Select value={type} onValueChange={(val) => {
+                            setType(val as TransactionType)
+                            setPage(1);
+                        }} >
+                            <SelectTrigger className="bg-white/10 border-white/20 text-white backdrop-blur-sm">
+                                <SelectValue placeholder="All Types" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white/10 border-white/20 backdrop-blur-md">
+                                <SelectGroup>
+                                    <SelectLabel className="text-white">Types</SelectLabel>
+                                    <SelectItem value="all" className="text-white hover:bg-white/20">All Types</SelectItem>
+                                    <SelectItem value={TransactionType.DEPOSIT} className="text-white hover:bg-white/20">Deposit</SelectItem>
+                                    <SelectItem value={TransactionType.WITHDRAWAL} className="text-white hover:bg-white/20">Withdrawal</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+
+                        {/* ShadCN Select for Status Filter */}
+                        <Select value={status} onValueChange={(val) => {
+                            setStatus(val as TransactionStatus)
+                            setPage(1);
+                        }} >
+                            <SelectTrigger className="bg-white/10 border-white/20 text-white backdrop-blur-sm">
+                                <SelectValue placeholder="All Statuses" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white/10 border-white/20 backdrop-blur-md">
+                                <SelectGroup>
+                                    <SelectLabel className="text-white">Status</SelectLabel>
+                                    <SelectItem value="all" className="text-white hover:bg-white/20">All Statuses</SelectItem>
+                                    <SelectItem value={TransactionStatus.PENDING} className="text-white hover:bg-white/20">Pending</SelectItem>
+                                    <SelectItem value={TransactionStatus.COMPLETED} className="text-white hover:bg-white/20">Completed</SelectItem>
+                                    <SelectItem value={TransactionStatus.FAILED} className="text-white hover:bg-white/20">Failed</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className="flex items-center gap-2" asChild>
+                                <Button variant="outline" size="sm" className="flex items-center gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm" >
+                                    <Download size={18} /> Download
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="bg-white/10 border-white/20 backdrop-blur-md">
+                                <DropdownMenuItem onClick={() => handleClickDownload("excel")} disabled={isPending} className="text-white hover:bg-white/20">
+                                    Excel
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleClickDownload("pdf")} disabled={isPending} className="text-white hover:bg-white/20">
+                                    PDF
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleClickDownload("csv")} disabled={isPending} className="text-white hover:bg-white/20">
+                                    CSV
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
-                    {/* ShadCN Select for Type Filter */}
-                    <Select value={type} onValueChange={(val) => {
-                        setType(val as TransactionType)
-                        setPage(1);
-                    }} >
-                        <SelectTrigger>
-                            <SelectValue placeholder="All Types" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Types</SelectLabel>
-                                <SelectItem value="all">All Types</SelectItem>
-                                <SelectItem value={TransactionType.DEPOSIT}>Deposit</SelectItem>
-                                <SelectItem value={TransactionType.WITHDRAWAL}>Withdrawal</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-
-                    {/* ShadCN Select for Status Filter */}
-                    <Select value={status} onValueChange={(val) => {
-                        setStatus(val as TransactionStatus)
-                        setPage(1);
-                    }} >
-                        <SelectTrigger>
-                            <SelectValue placeholder="All Statuses" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Status</SelectLabel>
-                                <SelectItem value="all">All Statuses</SelectItem>
-                                <SelectItem value={TransactionStatus.PENDING}>Pending</SelectItem>
-                                <SelectItem value={TransactionStatus.COMPLETED}>Completed</SelectItem>
-                                <SelectItem value={TransactionStatus.FAILED}>Failed</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-
-                    <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-2" asChild>
-                            <Button variant="outline" size="sm" className="flex items-center gap-2" >
-                                <Download size={18} /> Download
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuItem onClick={() => handleClickDownload("excel")} disabled={isPending}>
-                                Excel
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleClickDownload("pdf")} disabled={isPending}>
-                                PDF
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleClickDownload("csv")} disabled={isPending}>
-                                CSV
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </div>
-            </header>
-            <main className="mt-4">
-                <DataTable
-                    page={page}
-                    loading={isFetching}
-                    columns={transactionColumns}
-                    data={transactions}
-                    totalPage={totalPages}
-                    changePage={changePage}
-                />
-            </main>
+                </header>
+                <main className="mt-4">
+                    <DataTable
+                        page={page}
+                        loading={isFetching}
+                        columns={transactionColumns}
+                        data={transactions}
+                        totalPage={totalPages}
+                        changePage={changePage}
+                    />
+                </main>
+            </div>
         </section>
     );
 };

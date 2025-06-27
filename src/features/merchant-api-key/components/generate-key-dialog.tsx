@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { useCreateMerchantApiKey } from '../api/merchant-api-query';
 import ApiKeyGeneratorForm from './generate-key-form';
+import { cn } from "@/lib/utils";
 
 interface ApiKeyFormValues {
     ipAddress: string;
@@ -67,14 +68,20 @@ const CreateApiKeyDialog = ({
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[500px]">
-                <DialogHeader>
-                    <DialogTitle className="text-xl font-semibold">Create New API Key</DialogTitle>
-                    <DialogDescription>
+            <DialogContent className={cn(
+                "sm:max-w-[500px] bg-white/10 backdrop-blur-2xl border border-white/20",
+                "shadow-2xl shadow-black/30 text-white",
+                "hover:shadow-white/5 transition-all duration-300"
+            )}>
+                <DialogHeader className="space-y-3">
+                    <DialogTitle className="text-xl font-semibold text-white/90  p-4 ">
+                        Create New API Key
+                    </DialogTitle>
+                    <DialogDescription className="text-white/70 bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-2xl border border-white/10 p-3 rounded-lg shadow-lg shadow-black/15">
                         Configure and generate a new API key for merchant integration.
                     </DialogDescription>
                 </DialogHeader>
-                <Separator className="my-4" />
+                <div className="my-4 h-px bg-gradient-to-r from-white/20 via-white/10 to-white/20 shadow-lg shadow-black/20" />
                 <ApiKeyGeneratorForm
                     onSubmit={onSubmit}
                     isLoading={isPending}

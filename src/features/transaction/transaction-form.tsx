@@ -9,6 +9,7 @@ import { z } from "zod";
 import TransactionStatusAlert from "./transaction-status";
 import FormProvider from "@/components/form/form-provider";
 import FormGroupSelect from "@/components/form/form-select";
+import { CreditCard, Calendar, Hash, Percent, DollarSign } from "lucide-react";
 
 // Schema for transaction form validation
 export const transactionEditSchema = z.object({
@@ -24,6 +25,20 @@ type TransactionEditProps = {
     isLoading?: boolean;
 };
 
+const DetailRow = ({ icon: Icon, label, value }: { icon: any, label: string, value: string | number | null | undefined }) => {
+    if (value === null || value === undefined) return null;
+    
+    return (
+        <div className="flex items-start gap-3 py-2">
+            <Icon className="w-5 h-5 text-white/60 mt-0.5" />
+            <div>
+                <p className="text-sm text-white/60">{label}</p>
+                <p className="text-sm font-medium text-white">{value}</p>
+            </div>
+        </div>
+    );
+};
+
 const TransactionEditForm = ({ transaction, onSubmit, isLoading, showForm = false }: TransactionEditProps) => {
     const form = useForm<TransactionFormValues>({
         resolver: zodResolver(transactionEditSchema),
@@ -35,19 +50,41 @@ const TransactionEditForm = ({ transaction, onSubmit, isLoading, showForm = fals
 
     return (
         <section className="container-main min-h-[60vh] max-w-xl">
-            <Card className="border shadow-none bg-white">
-                <CardHeader>
-                    <CardTitle className="text-xl font-semibold">Transaction Details</CardTitle>
+            <Card className="w-full bg-white/10 border-white/20 backdrop-blur-md shadow-lg">
+                <CardHeader className="pb-4">
+                    <CardTitle className="text-xl text-white">Transaction Details</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <div className="space-y-4">
-                        {/* Read-only Transaction Details */}
-                        <p><strong>Type:</strong> {transaction.type}</p>
-                        <p><strong>Amount:</strong> ₹{transaction.amount}</p>
-                        <p><strong>PG ID:</strong> {transaction.pgId || "N/A"}</p>
-                        <p><strong>PlatFormFee %:</strong> {transaction.platformFeePercentage || 0}%</p>
-                        <p><strong>Created At:</strong> {new Date(transaction.createdAt).toLocaleDateString()}</p>
-                    </div>
+                <CardContent className="grid gap-2">
+                    <DetailRow
+                        icon={CreditCard}
+                        label="Type"
+                        value={transaction.type}
+                    />
+                    
+                    <DetailRow
+                        icon={DollarSign}
+                        label="Amount"
+                        value={`₹${transaction.amount}`}
+                    />
+                    
+                    <DetailRow
+                        icon={Hash}
+                        label="PG ID"
+                        value={transaction.pgId || "N/A"}
+                    />
+                    
+                    <DetailRow
+                        icon={Percent}
+                        label="Platform Fee"
+                        value={`${transaction.platformFeePercentage || 0}%`}
+                    />
+                    
+                    <DetailRow
+                        icon={Calendar}
+                        label="Created At"
+                        value={new Date(transaction.createdAt).toLocaleDateString()}
+                    />
+                    
                     {(currentStatus === TransactionStatus.PENDING && showForm) && (
                         <FormProvider methods={form} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
                             <FormGroupSelect
@@ -62,7 +99,11 @@ const TransactionEditForm = ({ transaction, onSubmit, isLoading, showForm = fals
                             />
 
                             <footer className="flex justify-end gap-4 mt-8">
-                                <Button type="submit" disabled={isLoading}>
+                                <Button 
+                                    type="submit" 
+                                    disabled={isLoading}
+                                    className="bg-white/20 border-white/30 text-white hover:bg-white/30 backdrop-blur-sm"
+                                >
                                     {isLoading ? "Updating..." : "Update Status"}
                                 </Button>
                             </footer>

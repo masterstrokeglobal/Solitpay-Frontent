@@ -70,18 +70,19 @@ export default function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-
   return (
     <div>
-      <div className={cn("dark:bg-dark-primary border rounded-xl overflow-hidden bg-white", className)}>
+      <div className={cn("bg-white/10 border border-white/20 rounded-xl overflow-hidden backdrop-blur-md shadow-lg", className)}>
         <Table>
           {showHeader && (
             <TableHeader className="px-4">
               {table?.getHeaderGroups().map((headerGroup) => (
                 <TableRow
-                  key={headerGroup.id}                >
+                  key={headerGroup.id}
+                  className="border-b border-white/20 hover:bg-white/5 transition-colors"
+                >
                   {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id} className="text-sm  text-gray-800 dark-border  border-b font-medium whitespace-nowrap" >
+                    <TableHead key={header.id} className="text-sm text-white font-medium whitespace-nowrap py-4">
                       <span className="flex font-semibold">
                         {header.isPlaceholder
                           ? null
@@ -96,18 +97,18 @@ export default function DataTable<TData, TValue>({
               ))}
             </TableHeader>
           )}
-          <TableBody  className="px-4">
+          <TableBody className="px-4">
             {!loading &&
               (table?.getRowModel().rows?.length ? (
                 table?.getRowModel().rows.map((row) => (
                   <TableRow
-                    className={cn("h-14", rowClassName)}
+                    className={cn("h-14 border-b border-white/10 hover:bg-white/5 transition-colors", rowClassName)}
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row?.getVisibleCells().map((cell) => (
                       <ErrorBoundary key={cell.id}>
-                        <TableCell>
+                        <TableCell className="text-white py-4">
                           {flexRender(
                             cell?.column.columnDef.cell,
                             cell.getContext()
@@ -121,7 +122,7 @@ export default function DataTable<TData, TValue>({
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
-                    className="h-24 text-center"
+                    className="h-24 text-center text-white/70"
                   >
                     No results.
                   </TableCell>
@@ -133,10 +134,10 @@ export default function DataTable<TData, TValue>({
                 {Array(10)
                   .fill(0)
                   .map((_, i) => (
-                    <TableRow key={i} className=" p-1">
+                    <TableRow key={i} className="border-b border-white/10">
                       {columns.map((column, j) => (
-                        <TableCell key={j}>
-                          <Skeleton className="h-6 w-full" />
+                        <TableCell key={j} className="py-4">
+                          <Skeleton className="h-6 w-full bg-white/20" />
                         </TableCell>
                       ))}
                     </TableRow>
@@ -145,15 +146,15 @@ export default function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-        <div className="flex md:items-center flex-wrap border-t py-2 px-4 bg-white w-full justify-between">
-          <div className="py-1 min-h-[60px]   md:px-4 items-center flex flex-row w-fit  justify-between gap-2">
-            <p className="text-[#6B7280]">Showing</p>
-            <div className="flex flex-col items-center gap-3">
+        <div className="flex md:items-center flex-wrap border-t border-white/20 py-4 px-4 bg-white/5 backdrop-blur-sm w-full justify-between">
+          <div className="py-1 min-h-[60px] md:px-4 items-center flex flex-row w-fit justify-between gap-2">
+            <p className="text-white/70">Showing</p>
+            <div className="flex flex-col items-center gap-3 text-white">
               {page}-{totalPage}
             </div>
             <div>
-              <span className="text-[#6B7280]">of</span>
-              &nbsp; {totalPage}
+              <span className="text-white/70">of</span>
+              &nbsp; <span className="text-white">{totalPage}</span>
             </div>
           </div>
           <Pagination

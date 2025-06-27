@@ -54,11 +54,8 @@ const LoginForm = () => {
                         deviceInfo: deviceInfo,
                         longitude: deviceInfo.location.longitude?.toString() ?? "",
                         latitude: deviceInfo.location.latitude?.toString() ?? "",
-                    }, {
-                        onSuccess: () => {
-                            router.push("/dashboard/merchant-dashboard");
-                        }
                     });
+                    router.push("/dashboard/merchant-dashboard");
 
                 } else {
                     router.push("/dashboard");
@@ -72,18 +69,23 @@ const LoginForm = () => {
             <FormInput
                 control={form.control}
                 label="Email"
+                placeholder="Enter your email"
                 name="email"
                 type="email"
+                glass
             />
             <FormPassword
                 control={form.control}
                 label="Password"
+                glass
+                placeholder="Enter your password"
                 name="password"
             />
             <FormGroupSelect
                 control={form.control}
                 label="Login As"
                 name="loginAs"
+                glass
                 options={[
                     { label: "Admin", value: AdminRole.SUPER_ADMIN },
                     { label: "Merchant", value: AdminRole.Merchant },

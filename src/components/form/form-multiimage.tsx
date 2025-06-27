@@ -22,6 +22,7 @@ interface FormMultiImageUploadProps<
     className?: string;
     disabled?: boolean;
     maxFiles?: number;
+    glass?: boolean;
 }
 
 function FormMultiImageUpload<
@@ -35,6 +36,7 @@ function FormMultiImageUpload<
     className,
     disabled = false,
     maxFiles = 5,
+    glass = false,
     ...props
 }: FormMultiImageUploadProps<TFieldValues, TName>) {
     const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -89,7 +91,7 @@ function FormMultiImageUpload<
             name={name}
             render={() => (
                 <FormItem className={`${className} space-y-2`} {...props}>
-                    {label && <FormLabel>{label}</FormLabel>}
+                    {label && <FormLabel className={glass ? "text-white" : ""}>{label}</FormLabel>}
 
                     <div className="flex flex-col gap-2">
                         {imageUrls.length < maxFiles && (
@@ -98,7 +100,11 @@ function FormMultiImageUpload<
                                     flex items-center justify-center 
                                     border-2 border-dashed rounded-lg 
                                     p-4 cursor-pointer 
-                                    hover:bg-gray-100 transition-colors
+                                    transition-colors
+                                    ${glass 
+                                        ? 'bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/20 text-white' 
+                                        : 'hover:bg-gray-100'
+                                    }
                                     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
                                 `}
                             >
@@ -115,7 +121,7 @@ function FormMultiImageUpload<
                                     className="hidden"
                                 />
                                 {!disabled && (
-                                    <div className="flex items-center gap-2 text-gray-600">
+                                    <div className={`flex items-center gap-2 ${glass ? 'text-white' : 'text-gray-600'}`}>
                                         <Upload size={20} />
                                         <span>{placeholder}</span>
                                     </div>
@@ -128,7 +134,7 @@ function FormMultiImageUpload<
                                 {imageUrls.map((url, index) => (
                                     <div
                                         key={index}
-                                        className="relative rounded-lg overflow-hidden"
+                                        className={`relative rounded-lg overflow-hidden ${glass ? 'bg-white/10 backdrop-blur-md border border-white/20' : ''}`}
                                     >
                                         <img
                                             src={url}

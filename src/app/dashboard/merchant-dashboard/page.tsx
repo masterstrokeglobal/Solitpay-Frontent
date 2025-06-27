@@ -65,11 +65,10 @@ export default function Dashboard() {
     }
   }
 
-  console.log("merchantStats", merchantStats)
   return (
-    <div className="space-y-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+    <div className="space-y-6 p-6  relative overflow-hidden">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-3xl font-bold text-black-sub-heading ">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <Select value={dateFilter} onValueChange={handleDateFilterChange}>
             <SelectTrigger className="w-full sm:w-[180px] border-indigo-200 hover:border-indigo-400 transition-colors">
@@ -98,13 +97,13 @@ export default function Dashboard() {
 
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
-          <Loader2 className="h-8 w-8  animate-spin" />
-          <span className="ml-2 text-lg ">Loading dashboard data...</span>
+          <Loader2 className="h-8 w-8 animate-spin" />
+          <span className="ml-2 text-lg">Loading dashboard data...</span>
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="border-0 shadow-lg overflow-hidden bg-gradient-to-br from-emerald-500 to-emerald-600 text-white hover:shadow-xl transition-shadow">
+            <Card className="border border-emerald-700 shadow-lg overflow-hidden bg-gradient-to-t from-emerald-700/80 to-emerald-600/80 backdrop-blur-md text-white hover:shadow-xl transition-shadow">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-emerald-100">Pay In Balance</CardTitle>
               </CardHeader>
@@ -112,7 +111,7 @@ export default function Dashboard() {
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-3xl font-bold">{merchantStats ? formatCurrency(merchantStats.totalPayIn) : '₹ 0'}</span>
-                    <p className="text-xs text-emerald-100 mt-1">Total  User Deposits</p>
+                    <p className="text-xs text-emerald-100 mt-1">Total User Deposits</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <Wallet className="h-6 w-6 text-white" />
@@ -121,31 +120,15 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg overflow-hidden bg-gradient-to-br from-rose-500 to-rose-600 text-white hover:shadow-xl transition-shadow">
+            <Card className="border border-red-700 shadow-lg overflow-hidden bg-gradient-to-t from-red-700/80 to-red-600/80 backdrop-blur-md text-white hover:shadow-xl transition-shadow">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-rose-100">Merchant </CardTitle>
+                <CardTitle className="text-sm font-medium text-rose-100">User Withdrawals</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-3xl font-bold">{merchantStats ? formatCurrency(merchantStats.totalPayOut) : '₹ 0'}</span>
-                    <p className="text-xs text-rose-100 mt-1">Total User Withdrawl </p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <CreditCard className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="border-0 shadow-lg overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 text-white hover:shadow-xl transition-shadow">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-rose-100">Merchat Withdrawl</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-3xl font-bold">{merchantStats ? formatCurrency(merchantStats.totalMerchantPayOut) : '₹ 0'}</span>
-                    <p className="text-xs text-rose-100 mt-1">Total Merchant Withdrawl </p>
+                    <p className="text-xs text-rose-100 mt-1">Total User Withdrawals</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <CreditCard className="h-6 w-6 text-white" />
@@ -154,8 +137,25 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-600 text-white hover:shadow-xl transition-shadow">
+            <Card className="border border-blue-700 shadow-lg overflow-hidden bg-gradient-to-t from-blue-700/80 to-blue-600/80 backdrop-blur-md text-white hover:shadow-xl transition-shadow">
               <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-blue-100">Merchant Withdrawals</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-3xl font-bold">{merchantStats ? formatCurrency(merchantStats.totalMerchantPayOut) : '₹ 0'}</span>
+                    <p className="text-xs text-blue-100 mt-1">Total Merchant Withdrawals</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <CreditCard className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-indigo-700 shadow-lg overflow-hidden bg-gradient-to-t from-indigo-700/80 to-indigo-600/80 backdrop-blur-md text-white hover:shadow-xl transition-shadow">
+              <CardHeader className="pb-2"> 
                 <CardTitle className="text-sm font-medium text-indigo-100">Wallet Balance</CardTitle>
               </CardHeader>
               <CardContent>
@@ -173,12 +173,12 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Card className="lg:col-span-2 border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader className="border-b border-gray-100 pb-4">
+            <Card variant="glass" className="lg:col-span-2 border border-white/20 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-t from-white/10 to-white/5 backdrop-blur-md">
+              <CardHeader className="border-b border-white/20 pb-4">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <BarChart2 className="h-5 w-5 text-indigo-600" />
-                    <CardTitle className="text-indigo-700">Transaction Statistics</CardTitle>
+                    <BarChart2 className="h-5 w-5 text-indigo-50" />
+                    <CardTitle className="text-indigo-50">Transaction Statistics</CardTitle>
                   </div>
                   <div className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-medium">
                     {dateFilter === "custom" && dateRange?.from && dateRange?.to
@@ -192,11 +192,11 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader className="flex flex-row items-center justify-between border-b border-gray-100 pb-4">
+            <Card variant="glass" className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+              <CardHeader className="flex flex-row items-center justify-between border-b border-white/20 pb-4">
                 <div className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5 " />
-                  <CardTitle className="">Transaction Status</CardTitle>
+                  <PieChart className="h-5 w-5 text-indigo-50" />
+                  <CardTitle className="text-indigo-50">Transaction Status</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">

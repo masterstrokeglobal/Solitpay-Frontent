@@ -45,29 +45,29 @@ const BankDetailsDashboard = () => {
     };
 
     if (isLoadingAccounts) {
-        return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+        return <div className="flex items-center justify-center min-h-screen text-white">Loading...</div>;
     }
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900/20 rounded-2xl">
             <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <div className="space-y-1">
-                        <h1 className="text-2xl font-bold text-gray-900">Bank Account Details</h1>
-                        <p className="text-gray-600">Manage your withdrawal bank accounts</p>
+                        <h1 className="text-3xl font-bold text-white tracking-tight">Bank Account Details</h1>
+                        <p className="text-gray-300">Manage your withdrawal bank accounts</p>
                     </div>
 
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
-                            <Button className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto">
+                            <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20 w-full sm:w-auto transition-all duration-200">
                                 <Plus className="h-4 w-4 mr-2" />
                                 Add New Account
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[525px]">
+                        <DialogContent glass className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg p-6 shadow-lg shadow-black/20">
                             <DialogHeader>
-                                <DialogTitle>Add New Bank Account</DialogTitle>
-                                <DialogDescription className="text-gray-600">
+                                <DialogTitle className="text-white">Add New Bank Account</DialogTitle>
+                                <DialogDescription className="text-gray-300">
                                     Enter your bank account details for withdrawals
                                 </DialogDescription>
                             </DialogHeader>
@@ -82,11 +82,11 @@ const BankDetailsDashboard = () => {
                             {bankAccounts.map((account) => (<WithdrawDetailsCard key={account.id} record={account} isDeleting={isDeleting} handleDelete={handleDelete} />))}
                         </div>
                     ) : (
-                        <Card>
+                        <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/20">
                             <CardContent className="flex flex-col items-center justify-center py-16">
-                                <Building2 className="h-12 w-12 text-gray-400 mb-4" />
-                                <p className="text-gray-500 mb-4">No bank accounts added yet</p>
-                                <Button className="bg-indigo-600 hover:bg-indigo-700" onClick={() => setOpen(true)}>
+                                <Building2 className="h-12 w-12 text-gray-300 mb-4" />
+                                <p className="text-gray-300 mb-4">No bank accounts added yet</p>
+                                <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/20" onClick={() => setOpen(true)}>
                                     <Plus className="h-4 w-4 mr-2" />
                                     Add Bank Account
                                 </Button>
@@ -94,8 +94,8 @@ const BankDetailsDashboard = () => {
                         </Card>
                     )}
 
-                    <Alert className="bg-indigo-50 border-indigo-100">
-                        <AlertDescription className="text-indigo-900">
+                    <Alert className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/20">
+                        <AlertDescription className="text-gray-300">
                             Your bank account details are encrypted and secure. We use industry-standard security measures to protect your information.
                         </AlertDescription>
                     </Alert>

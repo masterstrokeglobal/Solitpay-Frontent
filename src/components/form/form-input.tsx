@@ -23,6 +23,7 @@ function FormInput<
   children,
   label,
   className,
+  glass = false,
   ...props
 }: {
   label?: string;
@@ -33,6 +34,7 @@ function FormInput<
   Icon?: React.ReactNode;
   name: TName;
   description?: string;
+  glass?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <FormField
@@ -40,14 +42,18 @@ function FormInput<
       name={name}
       render={({ field }) => (
         <FormItem className={className}>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && <FormLabel className={glass ? "text-white" : ""}>{label}</FormLabel>}
           <FormControl>
             <div className={"relative"}>
-              <Input className={inputClassName} {...props} {...field} />
+              <Input 
+                className={`${inputClassName} ${glass ? "bg-white/10 placeholder:text-white/40 backdrop-blur-xl border-white/20 text-white  focus:bg-white/15 focus:border-white/30 shadow-lg shadow-black/20" : ""}`} 
+                {...props} 
+                {...field} 
+              />
               {children}
             </div>
           </FormControl>
-          {description && <FormDescription>{description}</FormDescription>}
+          {description && <FormDescription className={glass ? "text-white/80" : ""}>{description}</FormDescription>}
           <FormMessage />
         </FormItem>
       )}

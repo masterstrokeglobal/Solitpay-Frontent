@@ -42,7 +42,6 @@ const EditTransactionPage = () => {
 
     if (isLoading) return <LoadingScreen>Loading transaction...</LoadingScreen>;
 
-    console.log(userDetails);
 
     return (
         <>

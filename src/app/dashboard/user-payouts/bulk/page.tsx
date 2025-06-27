@@ -179,8 +179,11 @@ const FileUploader: React.FC<FileUploaderProps> = ({ file, setFile, setPreview, 
 
   return (
     <div
-      className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${isDragging ? 'bg-gray-100 border-blue-400' : 'hover:bg-gray-50 border-gray-300'
-        }`}
+      className={`backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer shadow-2xl ${
+        isDragging 
+          ? 'bg-blue-500/20 border-blue-400/30 shadow-blue-500/30 scale-105' 
+          : 'hover:bg-white/20 hover:border-white/30 hover:shadow-2xl hover:scale-[1.02]'
+      }`}
       onClick={() => fileInputRef.current?.click()}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -196,13 +199,15 @@ const FileUploader: React.FC<FileUploaderProps> = ({ file, setFile, setPreview, 
 
       {file ? (
         <div className="flex flex-col items-center">
-          <FileSpreadsheet className="h-10 w-10 text-green-500 mb-2" />
-          <p className="text-sm font-medium">{file.name}</p>
-          <p className="text-xs text-gray-500 mt-1">{(file.size / 1024).toFixed(2)} KB</p>
+          <div className="backdrop-blur-lg bg-green-500/15 p-4 rounded-full mb-4 shadow-lg">
+            <FileSpreadsheet className="h-12 w-12 text-green-500" />
+          </div>
+          <p className="text-sm font-medium text-white/90">{file.name}</p>
+          <p className="text-xs text-white/70 mt-1">{(file.size / 1024).toFixed(2)} KB</p>
           <Button
             variant="ghost"
             size="sm"
-            className="mt-2"
+            className="mt-4 backdrop-blur-lg bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all duration-200 text-white/90 hover:text-white"
             onClick={(e) => {
               e.stopPropagation();
               setFile(null);
@@ -214,9 +219,11 @@ const FileUploader: React.FC<FileUploaderProps> = ({ file, setFile, setPreview, 
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <UploadCloud className="h-10 w-10 text-gray-400 mb-2" />
-          <p className="text-sm font-medium">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-500 mt-1">Excel files only (.xlsx, .xls)</p>
+          <div className="backdrop-blur-lg bg-white/10 p-4 rounded-full mb-4 shadow-lg">
+            <UploadCloud className="h-12 w-12 text-white/80" />
+          </div>
+          <p className="text-sm font-medium text-white/90">Click to upload or drag and drop</p>
+          <p className="text-xs text-white/70 mt-1">Excel files only (.xlsx, .xls)</p>
         </div>
       )}
     </div>
@@ -308,25 +315,25 @@ const StatusMessages: React.FC<StatusMessagesProps> = ({ error, isSuccess }) => 
 // Template Info Component
 const TemplateInfo: React.FC = () => {
   return (
-    <Alert className="mb-4">
+    <Alert className="mb-4 border-white/20 bg-white/10 backdrop-blur-xl text-white shadow-lg shadow-black/20">
       <div className="flex items-start">
-        <Info className="h-5 w- mt-0.5 mr-2 flex-shrink-0" />
+        <Info className="h-5 w-5 mt-0.5 mr-2 flex-shrink-0 text-white/80" />
         <div className="flex-1">
-          <AlertTitle className=" font-medium mb-1">Template Information</AlertTitle>
-          <AlertDescription>
+          <AlertTitle className="font-medium mb-1 text-white/90">Template Information</AlertTitle>
+          <AlertDescription className="text-white/70">
             <p className="mb-2">Your Excel file should include the following columns:</p>
             <ul className="list-disc pl-5 mb-2 space-y-1">
-              <li><span className="font-medium">Required for all:</span> UserName, UserEmail, Amount, PaymentMode (UPI or IMPS)</li>
-              <li><span className="font-medium">For IMPS payments:</span> AccountName, AccountNumber, IFSCCode, BankName</li>
-              <li><span className="font-medium">For UPI payments:</span> UpiId</li>
+              <li><span className="font-medium text-white/90">Required for all:</span> UserName, UserEmail, Amount, PaymentMode (UPI or IMPS)</li>
+              <li><span className="font-medium text-white/90">For IMPS payments:</span> AccountName, AccountNumber, IFSCCode, BankName</li>
+              <li><span className="font-medium text-white/90">For UPI payments:</span> UpiId</li>
             </ul>
           </AlertDescription>
-          <div className="mt-3  pt-2 flex items-center">
-            <FileSpreadsheet className="h-4 mr-2" />
+          <div className="mt-3 pt-2 flex items-center">
+            <FileSpreadsheet className="h-4 mr-2 text-white/80" />
             <a
               href="/excel/dummy-bulk-payments.xlsx"
               download
-              className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline font-medium flex items-center"
+              className="text-sm text-blue-200 hover:text-blue-300 hover:underline font-medium flex items-center transition-colors"
             >
               Download sample template
             </a>
@@ -376,10 +383,10 @@ const BulkPayoutUploader: React.FC = () => {
 
   return (
     <div className="w-full mx-auto">
-      <Card className="w-full border-0">
+      <Card variant="glass" className="w-full border-0">
         <CardHeader>
-          <CardTitle className="text-2xl">Bulk Payout</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl text-white/90  ">Bulk Payout</CardTitle>
+          <CardDescription className="text-white/70">
             Upload an Excel file to create multiple payouts at once
           </CardDescription>
         </CardHeader>
