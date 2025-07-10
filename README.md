@@ -8,7 +8,7 @@ First, run the development server:
 yarn dev 
 # or 
 pnpm dev
-# or
+# or 
 bun dev
 ```
 
