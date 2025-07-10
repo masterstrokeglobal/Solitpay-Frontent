@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Transaction, TransactionStatus, TransactionType } from "@/models/transaction";
 import { Search, Plus } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { useAuthStore } from "@/context/auth-context";
 import { AdminRole } from "@/models/admin";
@@ -35,13 +35,20 @@ const TransactionTable = () => {
 
     const merchantId = userDetails?.role === AdminRole.Merchant ? userDetails?.id : undefined;
 
-    const { data, isSuccess, isFetching } = useGetAllTransactions({
+    const { data, isSuccess, isFetching,refetch } = useGetAllTransactions({
         page: page,
         search: search,
         type: TransactionType.WITHDRAWAL,
         merchantId: merchantId,
         status: status === "all" ? "" : status,
     });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refetch();
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     const transactions = useMemo(() => {
         if (isSuccess && data?.data?.transactions) {

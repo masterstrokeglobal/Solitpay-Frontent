@@ -15,7 +15,7 @@ import { useAuthStore } from "@/context/auth-context";
 import { AdminRole } from "@/models/admin";
 import { Transaction, TransactionStatus, TransactionType } from "@/models/transaction";
 import { Download, Search } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import transactionColumns from "../user/components/transaction-columns";
 import { useGetAllTransactions, useGetTransactionDownload } from "./query/transactions-queries";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -36,13 +36,22 @@ const TransactionTable = ({ userId }: Props) => {
     const merchanntId = userDetails?.role === AdminRole.Merchant ? userDetails?.id : userId;
 
     // Fetch all transactions with pagination, search query, and filters
-    const { data, isSuccess, isFetching } = useGetAllTransactions({
+    const { data, isSuccess, isFetching, refetch } = useGetAllTransactions({
         page: page,
         search: search,
         type: type === "all" ? "" : type,
         merchantId: merchanntId,
         status: status === "all" ? "" : status,
     });
+
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refetch();
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     const { mutateAsync: downloadData, isPending } = useGetTransactionDownload();
 
