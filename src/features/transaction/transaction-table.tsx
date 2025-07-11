@@ -180,7 +180,7 @@ const TransactionTable = ({ userId }: Props) => {
                 <main className="mt-4">
                     <DataTable
                         page={page}
-                        loading={isFetching}
+                        // loading={isFetching}
                         columns={transactionColumns}
                         data={transactions}
                         totalPage={totalPages}
