@@ -62,7 +62,7 @@ const EmployeeTable = () => {
             <main className="mt-4">
                 <DataTable
                     page={page}
-                    loading={isFetching}
+                    // loading={isFetching}
                     columns={employeeColumns}
                     data={employees}
                     totalPage={totalPages}

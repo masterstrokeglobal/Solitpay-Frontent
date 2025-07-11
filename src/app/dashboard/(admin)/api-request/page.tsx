@@ -97,7 +97,7 @@ const APIRequestTable = () => {
       <main className="mt-4">
         <DataTable
           page={page}
-          loading={isFetching}
+          // loading={isFetching}
           columns={apiRequestColumns}
           data={apiRequests}
           totalPage={totalPages}

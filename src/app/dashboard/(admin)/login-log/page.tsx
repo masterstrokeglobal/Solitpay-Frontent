@@ -66,7 +66,7 @@ const LoginLogTable = () => {
             <main className="mt-4">
                 <DataTable
                     page={page}
-                    loading={isFetching}
+                    // loading={isFetching}
                     columns={loginLogColumns}
                     data={loginLogs}
                     totalPage={totalPages}

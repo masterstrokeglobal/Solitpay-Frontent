@@ -56,7 +56,7 @@ const PermissionTable = () => {
             <main className="mt-4">
                 <DataTable
                     page={page}
-                    loading={isFetching}
+                    // loading={isFetching}
                     columns={permissionColumns}
                     data={permissions}
                     totalPage={totalPages}
