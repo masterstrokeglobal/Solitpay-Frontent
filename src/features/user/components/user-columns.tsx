@@ -10,7 +10,7 @@ import Admin, { AdminRole } from "@/models/admin";
 import Merchant from "@/models/merchant";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { ChartArea, Eye, Pen, Pencil } from 'lucide-react';
+import { ChartArea, Eye, Pencil } from 'lucide-react';
 import Link from "next/link";
 
 const merchantColumns: ColumnDef<Merchant>[] = [

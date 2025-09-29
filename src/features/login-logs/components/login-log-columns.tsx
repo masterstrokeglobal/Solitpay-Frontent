@@ -3,14 +3,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import LoginLog from "@/models/login-log";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     MapPin,
     Globe
 } from "lucide-react";
 import { toast } from "sonner";
-import dayjs from "dayjs";
 
 const loginLogColumns: ColumnDef<LoginLog>[] = [
     {

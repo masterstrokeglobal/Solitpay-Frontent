@@ -1,5 +1,4 @@
 import api from "@/lib/axios/instance";
-import Surcharge from "@/models/surcharge";
 import { SurchargeSchemaType } from "../components/surchange-form";
 
 const surchargeAPI = {

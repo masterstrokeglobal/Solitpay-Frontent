@@ -12,6 +12,11 @@ import { MerchantQr } from "@/features/merchant-qr/type";
 import Link from "next/link";
 import { useMerchantQrWebSocket } from "@/hooks/use-payments";
 import QRCode from "@/features/merchant-qr/components/custom-qr-code";
+import SolitpayInitiateForm from "@/features/solitpay/components/initiate-form";
+import { useState } from "react";
+import { getSolitpayBalance, solitpayStatus } from "@/features/solitpay/api/solitpay-api";
+import SolitpayOrderForm from "@/features/solitpay/components/order-form";
+import SolitpayPayoutForm from "@/features/solitpay/components/payout-form";
 
 
 
@@ -129,6 +134,9 @@ const MerchantQrCard = ({ qr }: MerchantQrCardProps) => {
 
 const MerchantQrPage = () => {
   const { data, isLoading, error } = useGetAllMerchantQrs({ isActive: true });
+  const [solitpayBalance, setSolitpayBalance] = useState<string>("-");
+  const [statusTxnId, setStatusTxnId] = useState<string>("");
+  const [statusResult, setStatusResult] = useState<any>(null);
 
 
   useMerchantQrWebSocket();
@@ -166,6 +174,61 @@ const MerchantQrPage = () => {
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Payment QR Codes</h1>
         <p className="text-gray-500">Scan or click to make payments</p>
+
+        <div className="mt-4 p-4 border rounded-md">
+          <h2 className="text-lg font-semibold mb-2">Pay-in via Solitpay</h2>
+          <SolitpayInitiateForm />
+        </div>
+
+        <div className="mt-4 p-4 border rounded-md">
+          <h2 className="text-lg font-semibold mb-2">Solitpay Wallet Balance</h2>
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold">₹ {solitpayBalance}</span>
+            <button
+              className="text-sm underline"
+              onClick={async () => {
+                const res = await getSolitpayBalance();
+                setSolitpayBalance(res?.data?.wallet_balance ?? "-");
+              }}
+            >Refresh</button>
+          </div>
+        </div>
+
+        <div className="mt-4 p-4 border rounded-md">
+          <h2 className="text-lg font-semibold mb-2">Check Transaction Status</h2>
+          <div className="flex gap-2 items-center">
+            <input
+              className="border px-3 py-2 rounded w-full md:w-1/2"
+              placeholder="Enter txnid e.g. RDP682B359D5A8D05"
+              value={statusTxnId}
+              onChange={(e) => setStatusTxnId(e.target.value)}
+            />
+            <button
+              className="px-4 py-2 border rounded"
+              onClick={async () => {
+                if (!statusTxnId) return;
+                const res = await solitpayStatus({ txnid: statusTxnId });
+                setStatusResult(res);
+              }}
+            >Check</button>
+          </div>
+          {statusResult && (
+            <pre className="mt-3 text-xs bg-gray-50 p-3 rounded overflow-auto">
+{JSON.stringify(statusResult, null, 2)}
+            </pre>
+          )}
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 border rounded-md">
+            <h2 className="text-lg font-semibold mb-2">Create UPI Order (QR/Link)</h2>
+            <SolitpayOrderForm />
+          </div>
+          <div className="p-4 border rounded-md">
+            <h2 className="text-lg font-semibold mb-2">Initiate Payout</h2>
+            <SolitpayPayoutForm />
+          </div>
+        </div>
       </div>
 
       {!data?.data?.length ? (

@@ -2,10 +2,10 @@
 
 import React, { useMemo } from "react";
 import LoadingScreen from "@/components/common/loading-screen";
-import { useParams, useRouter } from "next/navigation";
-import { Transaction, TransactionStatus, TransactionType } from "@/models/transaction";
+import { useParams } from "next/navigation";
+import { TransactionStatus } from "@/models/transaction";
 import TransactionEditForm, { TransactionFormValues } from "@/features/transaction/transaction-form";
-import { useApproveTransaction, useConfirmWithdrawal, useGetTransactionById, useRejectTransaction, useUpdateTransactionById } from "@/features/transaction/query/transactions-queries";
+import { useApproveTransaction, useGetTransactionById, useRejectTransaction } from "@/features/transaction/query/transactions-queries";
 import WithdrawDetailsRecord from "@/models/withdrawl-details";
 import Merchant from "@/models/merchant";
 import { MerchantDetailsCard, WithdrawalDetailsCard } from "@/features/merchant/merchant-card-small";

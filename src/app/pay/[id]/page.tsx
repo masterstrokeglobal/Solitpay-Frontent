@@ -12,7 +12,6 @@ import { Check, Loader2 } from "lucide-react";
 import FormProvider from "@/components/form/form-provider";
 import FormInput from "@/components/form/form-input";
 import { useGetMerchantById } from "@/features/merchant/api/merchant-query";
-import { useGetAllMerchantQrs } from "@/features/merchant-qr/api/merchant-qr-query";
 import MerchantQRCarousel from "@/features/merchant-qr/components/qr-carousel";
 import Merchant, { APIS } from "@/models/merchant";
 

@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { BriefcaseBusiness, Building, Clock, Code2, DollarSign, Home, KeyIcon, LucideIcon, QrCodeIcon, Repeat1, Users } from 'lucide-react';
+import { BriefcaseBusiness, Home, LucideIcon, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -11,9 +11,8 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useAuthStore } from '@/context/auth-context';
-import Admin, { AdminRole } from '@/models/admin';
+import { AdminRole } from '@/models/admin';
 import Logo from "./common/logo";
-import Merchant, { APIS } from "@/models/merchant";
 
 interface SubMenuItem {
     name: string;
@@ -32,56 +31,11 @@ const adminMenuItems: MenuItem[] = [
         icon: Home,
         link: '/dashboard',
     },
-    //Role Permission
-    {
-        name: 'Role Permission',
-        icon: KeyIcon,
-        link: '/dashboard/permissions',
-    },
-    {
-        name: 'Merchants',
-        icon: BriefcaseBusiness,
-        link: '/dashboard/merchants',
-    },
     {
         name: 'Transactions',
         icon: Users,
         link: '/dashboard/admin-transactions',
     },
-    //payouts
-    {
-        name: 'Payouts',
-        icon: DollarSign,
-        link: '/dashboard/payouts',
-    },
-
-    {
-        name: 'Employee',
-        icon: Users,
-        link: '/dashboard/employee',
-    },
-
-    {
-        name: "API Services",
-        icon: Code2,
-        link: '/dashboard/api-service',
-    },
-    {
-        name: "API Requests",
-        icon: Code2,
-        link: '/dashboard/api-request',
-    },
-    {
-        name: "Login Logs",
-        icon: Clock,
-        link: '/dashboard/login-log',
-    },
-    {
-        name: "Surcharge",
-        icon: DollarSign,
-        link: '/dashboard/surcharge',
-    },
-
 ];
 
 
@@ -100,11 +54,6 @@ const Sidebar = ({ className }: PropsWithClassName) => {
             icon: Users,
             link: '/dashboard/transactions',
         },
-        {
-            name:"Merchant Documents",
-            icon: Building,
-            link: '/dashboard/documents',
-        }
     ];
 
     const pathname = usePathname();
@@ -166,54 +115,7 @@ const Sidebar = ({ className }: PropsWithClassName) => {
 
     const menuItems = userDetails?.role === AdminRole.SUPER_ADMIN ? adminMenuItems : merchantMenuItems;
 
-    const isMerchant = userDetails?.role != AdminRole.SUPER_ADMIN;
-
-    if (isMerchant) {
-        const merchant = userDetails as Merchant;
-
-        if (!merchant.restrictedApi?.includes(APIS.MERCHANT_QR)) {
-            menuItems.push({
-                name: "QR Codes",
-                icon: QrCodeIcon,
-                link: '/dashboard/qr-codes'
-            });
-        }
-
-        if (!merchant.restrictedApi?.includes(APIS.USER_WITHDRAW)) {
-            menuItems.push({
-                name: "User Payouts",
-                icon: DollarSign,
-                link: '/dashboard/user-payouts'
-            });
-        }
-
-        if (!merchant.restrictedApi?.includes(APIS.MERCHANT_PAYOUT)) {
-            menuItems.push({
-                name: 'Payouts',
-                icon: DollarSign,
-                link: '/dashboard/payouts',
-            });
-            menuItems.push({
-                name: "Payout Options",
-                icon: Repeat1,
-                link: '/dashboard/payout-options'
-            });
-        }
-
-        if (!merchant.restrictedApi?.includes(APIS.DEVELOPER_API)) {
-            menuItems.push({
-                name: "Available API's",
-                icon: Code2,
-                link: '/dashboard/apis'
-            },
-                {
-                    name: "Developer Settings",
-                    icon: KeyIcon,
-                    link: '/dashboard/api-key'
-                });
-        }
-
-    }
+    // Simplified sidebar per request: only core items retained
 
     return (
         <div className={cn("flex  flex-col bg-[url('/images/sidebar.jpg')] bg-cover rounded-r-xl shadow-sm bg-center", className)}>

@@ -9,7 +9,7 @@ import { z } from "zod";
 import TransactionStatusAlert from "./transaction-status";
 import FormProvider from "@/components/form/form-provider";
 import FormGroupSelect from "@/components/form/form-select";
-import { CreditCard, Calendar, Hash, Percent, DollarSign } from "lucide-react";
+import { CreditCard, Calendar, Hash, DollarSign } from "lucide-react";
 
 // Schema for transaction form validation
 export const transactionEditSchema = z.object({
@@ -73,11 +73,7 @@ const TransactionEditForm = ({ transaction, onSubmit, isLoading, showForm = fals
                         value={transaction.pgId || "N/A"}
                     />
                     
-                    <DetailRow
-                        icon={Percent}
-                        label="Platform Fee"
-                        value={`${transaction.platformFeePercentage || 0}%`}
-                    />
+                    {/* Platform fee removed per request */}
                     
                     <DetailRow
                         icon={Calendar}

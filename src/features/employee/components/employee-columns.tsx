@@ -10,7 +10,7 @@ import Admin, { AdminRole } from "@/models/admin";
 import Employee from "@/models/employee";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { Eye, Loader2, Pen, Pencil, Trash } from 'lucide-react';
+import { Loader2, Pencil, Trash } from 'lucide-react';
 import Link from "next/link";
 import { useDeleteEmployeeById } from "../api/employee-query";
 

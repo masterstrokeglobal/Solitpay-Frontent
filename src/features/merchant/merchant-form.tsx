@@ -7,7 +7,6 @@ import FormProvider from "@/components/form/form-provider";
 import FormSwitch from "@/components/form/form-switch";
 import FormTextArea from "@/components/form/form-text-area";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FormImage from "@/components/ui/form-image";
 import { z } from "zod";
 
 // Define schema for merchant input

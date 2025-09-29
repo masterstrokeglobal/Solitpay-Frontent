@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
     DialogTitle
 } from "@/components/ui/dialog";
 import {

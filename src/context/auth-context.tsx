@@ -1,6 +1,5 @@
 import Admin from "@/models/admin";
 import Merchant from "@/models/merchant";
-import User from "@/models/user";
 import React, {
   PropsWithChildren,
   createContext,

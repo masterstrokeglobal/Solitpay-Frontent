@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/context/auth-context";
 import {
-    useCreateMerchantQr,
     useGetAllMerchantQrs
 } from '@/features/merchant-qr/api/merchant-qr-query';
 import { QuickActions } from '@/features/merchant-qr/components/qr-actions';

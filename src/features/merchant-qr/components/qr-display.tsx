@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, PlusCircle, Share2, Trash } from 'lucide-react';
+import { Download, Share2, Trash } from 'lucide-react';
 import { useState, useRef } from 'react';
 import {
     Card,

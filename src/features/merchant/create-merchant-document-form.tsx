@@ -1,6 +1,6 @@
 "use client";
 import LoadingScreen from "@/components/common/loading-screen";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { useCreateMerchantDocument, useGetMerchantDocumentByMerchantId, useUpdateMerchantDocument } from "./api/merchant-query";
 import MerchantDocumentForm, { MerchantDocumentFormValues } from "./merchant-documents-form";

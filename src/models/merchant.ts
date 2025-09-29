@@ -1,4 +1,3 @@
-import { AdminRole } from "./admin";
 import Wallet from "./wallet";
 import WithdrawDetailsRecord from "./withdrawl-details";
 import { Transaction } from "./transaction";

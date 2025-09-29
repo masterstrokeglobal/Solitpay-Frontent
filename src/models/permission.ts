@@ -1,4 +1,3 @@
-import { AdminRole } from "./admin";
 
 class Permission {
     id?: number;

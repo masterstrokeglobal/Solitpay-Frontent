@@ -1,7 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { Wallet, Banknote, CheckCircle2, XCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Wallet, CheckCircle2, XCircle } from "lucide-react";
 
 // Dummy data for payouts
 const payouts = [

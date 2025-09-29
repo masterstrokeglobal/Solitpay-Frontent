@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import userColumns from "@/features/user/components/user-columns";
 import { useGetAllUsers } from "@/features/user/data/user-queries";
 import Merchant from "@/models/merchant";
-import User from "@/models/user"; // Import the User model
+// Import the User model
 import { Search } from "lucide-react";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";

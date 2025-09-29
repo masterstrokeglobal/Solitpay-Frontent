@@ -12,9 +12,7 @@ import {
   Building2,
   MapPin,
   Mail,
-  Phone,
-  Percent,
-  Image as ImageIcon
+  Percent
 } from 'lucide-react';
 import Merchant from '@/models/merchant';
 

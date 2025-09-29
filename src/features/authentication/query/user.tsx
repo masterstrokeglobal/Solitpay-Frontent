@@ -1,9 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { RegisterPayload, userAPI } from '../api/user';
-import User from '@/models/user';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'sonner';
-import { error } from 'console';
 import Admin, { AdminRole } from '@/models/admin';
 import Merchant from '@/models/merchant';
 

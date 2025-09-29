@@ -1,5 +1,4 @@
 import api from "@/lib/axios/instance";
-import { create } from "domain";
 
 export const userWithdrawalAPI = {
     getAllUserWithdrawals: async (filter: any) => {

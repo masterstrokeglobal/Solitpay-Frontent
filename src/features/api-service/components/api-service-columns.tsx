@@ -2,7 +2,7 @@ import { AlertDialog, AlertDialogDescription, AlertDialogTitle, AlertDialogHeade
 import { Button } from "@/components/ui/button";
 import APIService from "@/models/api-service";
 import { Trash } from "lucide-react";
-import { ColumnDef, Row } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
 import { useDeleteAPIService } from "../api/api-service-query";

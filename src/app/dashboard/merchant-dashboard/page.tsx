@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react"
 import { DateRange } from "react-day-picker"
-import { addDays, endOfDay, format, startOfDay, startOfMonth, startOfWeek } from "date-fns"
+import { endOfDay, format, startOfDay, startOfMonth, startOfWeek } from "date-fns"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Wallet, CreditCard, BarChart2, PieChart, Loader2 } from 'lucide-react'
@@ -11,6 +11,8 @@ import { TransactionChart } from "@/features/merchant/transaction-chart"
 import { TransactionDonut } from "@/features/merchant/transaction-donut"
 import { useGetMerchantDashboardData } from "@/features/merchant/api/merchant-query"
 import { useAuthStore } from "@/context/auth-context"
+import { useEffect } from "react"
+import { getSolitpayBalance } from "@/features/solitpay/api/solitpay-api"
 
 export default function Dashboard() {
   const [dateFilter, setDateFilter] = useState("month");
@@ -31,6 +33,16 @@ export default function Dashboard() {
     if (!isSuccess) return null;
     return data?.data;
   }, [data, isLoading, isSuccess])
+
+  const [solitpayBalance, setSolitpayBalance] = useState<string>("-")
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await getSolitpayBalance()
+        setSolitpayBalance(res?.data?.wallet_balance ?? "-")
+      } catch {}
+    })()
+  }, [])
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-IN', {
@@ -156,12 +168,12 @@ export default function Dashboard() {
 
             <Card className="border border-indigo-700 shadow-lg overflow-hidden bg-gradient-to-t from-indigo-700/80 to-indigo-600/80 backdrop-blur-md text-white hover:shadow-xl transition-shadow">
               <CardHeader className="pb-2"> 
-                <CardTitle className="text-sm font-medium text-indigo-100">Wallet Balance</CardTitle>
+                <CardTitle className="text-sm font-medium text-indigo-100">Wallet Balance (Solitpay)</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="text-3xl font-bold">{merchantStats ? formatCurrency(merchantStats.wallet) : '₹ 0'}</span>
+                    <span className="text-3xl font-bold">₹ {solitpayBalance}</span>
                     <p className="text-xs text-indigo-100 mt-1">Available balance</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">

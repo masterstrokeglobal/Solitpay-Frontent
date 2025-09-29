@@ -9,7 +9,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { useCreateMerchantApiKey } from '../api/merchant-api-query';
 import ApiKeyGeneratorForm from './generate-key-form';

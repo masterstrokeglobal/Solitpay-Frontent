@@ -1,7 +1,6 @@
 "use client";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -15,10 +14,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { useCreatePayoutOption, useDeletePayoutOption, useGetAllPayoutOptions, useUpdatePayoutOption } from '@/features/payout/api/payout-quieries';
+import { useCreatePayoutOption, useDeletePayoutOption, useGetAllPayoutOptions } from '@/features/payout/api/payout-quieries';
 import BankAccountForm, { BankFormValues } from "@/features/payout/create/bank-form";
 import WithdrawDetailsCard from "@/features/payout/create/payout-option-card";
-import { Building2, Plus, Trash2 } from 'lucide-react';
+import { Building2, Plus } from 'lucide-react';
 import React from 'react';
 
 // Main Dashboard Component

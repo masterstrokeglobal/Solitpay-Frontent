@@ -1,10 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, PenIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Transaction, TransactionStatus, TransactionType } from "@/models/transaction";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import { useAuthStore } from "@/context/auth-context";
 
 const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -73,60 +69,28 @@ const transactionColumns: ColumnDef<Transaction>[] = [
             );
         },
     },
-    {
-        header: "Platform Fee %",
-        accessorKey: "bonusPercentage",
-        cell: ({ row }) => (
-            <div className="text-white">
-                {row.original.platformFeePercentage}%
-            </div>
-        ),
-    },
-    {
-        header: "Platform Fee",
-        accessorKey: "bonusAmount",
-        cell: ({ row }) => (
-            <div className="text-white">
-                Rs.{row.original.platformFeeAmount.toFixed(2)}
-            </div>
-        ),
-    },
+    // Platform fee columns removed per request
     {
         header: "CREATED AT",
         accessorKey: "createdAt",
-        cell: ({ row }) => (
-            <div className="text-white">
-                {new Date(row.original.createdAt).toLocaleString()}
-            </div>
-        ),
-    },
-    {
-        header: "",
-        accessorKey: "actions",
-        cell: ({ row }) => (
-            <ActionColumn transaction={row.original} />
-        ),
+        cell: ({ row }) => {
+            const utc = new Date(row.original.createdAt);
+            const istMs = utc.getTime() + (5.5 * 60 * 60 * 1000);
+            const d = new Date(istMs);
+            const pad = (n: number) => n.toString().padStart(2, '0');
+            const dd = pad(d.getDate());
+            const mm = pad(d.getMonth() + 1);
+            const yyyy = d.getFullYear();   
+            let hh = d.getHours();
+            const min = pad(d.getMinutes());
+            const sec = pad(d.getSeconds());
+            const ampm = hh >= 12 ? 'pm' : 'am';
+            hh = hh % 12; hh = hh ? hh : 12; // 12-hour format
+            const hhStr = pad(hh);
+            const display = `${dd}/${mm}/${yyyy}, ${hhStr}:${min}:${sec} ${ampm}`;
+            return <div className="text-white">{display}</div>;
+        },
     },
 ];
 
 export default transactionColumns;
-
-const ActionColumn = ({ transaction }: { transaction: Transaction }) => {
-    const { userDetails } = useAuthStore();
-
-    return (
-        <div className="flex justify-end">
-
-            <Link href={`/dashboard/transactions/${transaction.id}`}>
-                <Button
-                    size="icon"
-                    variant="ghost"
-                    aria-label="Edit Transaction"
-                >
-                    <Eye className="w-5 h-5" />
-                </Button>
-            </Link>
-
-        </div>
-    );
-}
