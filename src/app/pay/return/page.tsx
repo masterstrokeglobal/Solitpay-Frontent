@@ -1,7 +1,8 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function PayReturnPage() {
+function PayReturnContent() {
   const params = useSearchParams();
   const orderId = params.get("order_id");
   const status = params.get("status");
@@ -17,6 +18,14 @@ export default function PayReturnPage() {
       </div>
       <p className="text-gray-500 mt-4">Final status is confirmed via webhook in your dashboard.</p>
     </div>
+  );
+}
+
+export default function PayReturnPage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto p-6">Loading payment result…</div>}>
+      <PayReturnContent />
+    </Suspense>
   );
 }
 
