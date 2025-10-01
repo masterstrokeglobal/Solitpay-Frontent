@@ -33,7 +33,8 @@ const TransactionTable = ({ userId }: Props) => {
     const [status, setStatus] = useState<string | "">("");
     const { userDetails } = useAuthStore();
 
-    const merchanntId = userDetails?.role === AdminRole.Merchant ? userDetails?.id : userId;
+    // Don't filter by merchantId - let merchants see all transactions
+    const merchanntId = userId; // Only use userId if passed (for admin viewing specific merchant)
 
     // Fetch all transactions with pagination, search query, and filters
     const { data, isSuccess, isFetching, refetch } = useGetAllTransactions({

@@ -20,6 +20,9 @@ const loginFormSchema = z.object({
         .email({ message: "Invalid email format" })
         .max(255, { message: "Email must be less than 255 characters" }),
     password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+    loginAs: z.enum([AdminRole.SUPER_ADMIN, AdminRole.Merchant], {
+        required_error: "Please select a login type",
+    }),
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
@@ -27,6 +30,7 @@ export type LoginFormValues = z.infer<typeof loginFormSchema>;
 const defaultValues: LoginFormValues = {
     email: "",
     password: "",
+    loginAs: AdminRole.SUPER_ADMIN,
 };
 
 const LoginForm = () => {
@@ -40,7 +44,7 @@ const LoginForm = () => {
 
     const deviceInfo = useDeviceInfo();
     const onSubmit = (formValue: LoginFormValues) => {
-        mutate({ ...formValue, loginAs: AdminRole.SUPER_ADMIN }, {
+        mutate(formValue, {
             onSuccess: (data: AxiosResponse<any>) => {
                 router.push("/dashboard");
             }
@@ -64,7 +68,16 @@ const LoginForm = () => {
                 placeholder="Enter your password"
                 name="password"
             />
-            {/* Removed merchant/admin dropdown per request; always admin login */}
+            <FormGroupSelect
+                control={form.control}
+                label="Login As"
+                name="loginAs"
+                glass
+                options={[
+                    { label: "Admin", value: AdminRole.SUPER_ADMIN },
+                    { label: "Merchant", value: AdminRole.Merchant },
+                ]}
+            />
             <div className="space-y-2 pt-2">
                 <Button disabled={isPending} className="block w-full"  >
                     Login

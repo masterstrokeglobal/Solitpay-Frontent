@@ -44,6 +44,48 @@ const transactionColumns: ColumnDef<Transaction>[] = [
         ),
     },
     {
+        header: "PLATFORM FEE",
+        accessorKey: "platformFeePercentage",
+        cell: ({ row }) => {
+            const feePercentage = row.original.platformFeePercentage || 0;
+            const feeAmount = row.original.platformFeeAmount || 0;
+            return (
+                <div className="text-white">
+                    <div className="font-medium">{feePercentage}%</div>
+                    <div className="text-sm text-white/70">Rs.{feeAmount.toFixed(2)}</div>
+                </div>
+            );
+        },
+    },
+    {
+        header: "GST (18%)",
+        accessorKey: "gst",
+        cell: ({ row }) => {
+            const platformFeeAmount = row.original.platformFeeAmount || 0;
+            const gstAmount = (platformFeeAmount * 18) / 100;
+            return (
+                <div className="text-white font-medium">
+                    Rs.{gstAmount.toFixed(2)}
+                </div>
+            );
+        },
+    },
+    {
+        header: "NET AMOUNT",
+        accessorKey: "netAmount",
+        cell: ({ row }) => {
+            const amount = row.original.amount || 0;
+            const platformFeeAmount = row.original.platformFeeAmount || 0;
+            const gstAmount = (platformFeeAmount * 18) / 100;
+            const netAmount = amount - platformFeeAmount - gstAmount;
+            return (
+                <div className="font-bold text-green-400">
+                    Rs.{netAmount.toFixed(2)}
+                </div>
+            );
+        },
+    },
+    {
         header: "STATUS",
         accessorKey: "status",
         cell: ({ row }) => {
@@ -69,7 +111,6 @@ const transactionColumns: ColumnDef<Transaction>[] = [
             );
         },
     },
-    // Platform fee columns removed per request
     {
         header: "CREATED AT",
         accessorKey: "createdAt",
