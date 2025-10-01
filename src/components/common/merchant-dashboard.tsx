@@ -18,10 +18,10 @@ type Props = {
 }
 
 export default function MerchantDashboard({ merchantId }: Props) {
-    const [dateFilter, setDateFilter] = useState("month");
+    const [dateFilter, setDateFilter] = useState("lifetime");
     const today = endOfDay(new Date())
     const [dateRange, setDateRange] = useState<DateRange | undefined>({
-        from: startOfMonth(today), to: today
+        from: new Date(2020, 0, 1), to: today
     })
 
     const { userDetails } = useAuthStore();

@@ -11,7 +11,7 @@ declare global {
 }
 
 const api: AxiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL??"https://bolt-payment-backend.onrender.com/api",
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL??"http://localhost:7003/api",
     headers: {
         'Content-Type': 'application/json',
     },

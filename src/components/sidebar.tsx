@@ -32,6 +32,11 @@ const adminMenuItems: MenuItem[] = [
         link: '/dashboard',
     },
     {
+        name: 'Merchants',
+        icon: BriefcaseBusiness,
+        link: '/dashboard/merchants',
+    },
+    {
         name: 'Transactions',
         icon: Users,
         link: '/dashboard/admin-transactions',
